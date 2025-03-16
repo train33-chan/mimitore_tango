@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Youtube動画リスト</title>
+    <title>企業経営理論 単語暗記</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,8 +19,41 @@
             text-align: center;
             font-size: 1.5em;
             font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
         }
-        #video-player {
+        .menu-toggle {
+            font-size: 1.5em;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+        }
+        .menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            background-color: #444;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .menu a {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background-color: #555;
+        }
+        .show-menu {
+            display: block;
+        }
+      #video-player {
             flex: 1;
             display: flex;
             justify-content: center;
@@ -72,8 +105,13 @@
 </head>
 <body>
     <header>
-        Youtube動画リスト
-    </header>    <div id="video-player">
+        企業経緯理論　単語チェックリスト
+        <button class="menu-toggle">☰</button>
+        <nav class="menu">
+            <a href="#">ホーム</a>
+            <a href="#">カテゴリ</a>
+            <a href="#">設定</a>
+        </nav>    </header>    <div id="video-player">
         <iframe id="youtube-frame" src="https://www.youtube.com/embed/1YrqNWNMrmE" frameborder="0" allowfullscreen></iframe>
     </div>
     <div id="video-list">
@@ -312,7 +350,9 @@
   { id: "WlTn2UDtni4?start=138", title: "208 組織文化の逆機能" },
   { id: "WlTn2UDtni4?start=159", title: "209 斉一性の圧力" },
   { id: "WlTn2UDtni4?start=177", title: "210 シャインの組織文化論" },
-  { id: "WlTn2UDtni4?start=198", title: "211 カウンターカルチャー" },
+  { id: "WlTn2UDtni4?start=198", title: "211 カウンターカルチャー" }
+],
+    "11. 組織における個人": [
   { id: "WlTn2UDtni4?start=220", title: "212 成熟・未成熟理論" },
   { id: "WlTn2UDtni4?start=243", title: "213 X理論" },
   { id: "WlTn2UDtni4?start=264", title: "214 Y理論" },
@@ -337,7 +377,9 @@
   { id: "WlTn2UDtni4?start=642", title: "233 ERG 理論" },
   { id: "WlTn2UDtni4?start=662", title: "234 期待理論" },
   { id: "WlTn2UDtni4?start=681", title: "235 公平理論" },
-  { id: "WlTn2UDtni4?start=703", title: "236 目標設定理論" },
+  { id: "WlTn2UDtni4?start=703", title: "236 目標設定理論" }
+],
+    "12. 組織の中の人間関係・集団": [
   { id: "WlTn2UDtni4?start=723", title: "237 グループシフト" },
   { id: "WlTn2UDtni4?start=745", title: "238 グループシンク" },
   { id: "WlTn2UDtni4?start=766", title: "239 リスキーシフト" },
@@ -351,14 +393,285 @@
   { id: "WlTn2UDtni4?start=931", title: "247 集団圧力" },
   { id: "WlTn2UDtni4?start=948", title: "248 パワーの源泉" },
   { id: "WlTn2UDtni4?start=968", title: "249 正当権力" },
-  { id: "WlTn2UDtni4?start=984", title: "250 専門力" } 
-]      
+  { id: "WlTn2UDtni4?start=984", title: "250 専門力" } ,
+{ id: "G7akZyqAHPM?start=0", title: "251 報酬力" },
+  { id: "G7akZyqAHPM?start=19", title: "252 強制力" },
+  { id: "G7akZyqAHPM?start=37", title: "253 同一視力" },
+  { id: "G7akZyqAHPM?start=56", title: "254 有機的管理システム" },
+  { id: "G7akZyqAHPM?start=75", title: "255 誘因" },
+  { id: "G7akZyqAHPM?start=90", title: "256 準拠勢力" },
+  { id: "G7akZyqAHPM?start=109", title: "257 専門勢力" },
+  { id: "G7akZyqAHPM?start=125", title: "258 アイオワ研究" },
+  { id: "G7akZyqAHPM?start=144", title: "259 オハイオ研究" },
+  { id: "G7akZyqAHPM?start=164", title: "260 ミシガン研究" },
+  { id: "G7akZyqAHPM?start=186", title: "261 PM理論" },
+  { id: "G7akZyqAHPM?start=206", title: "262 マネジリアルグリッド" },
+  { id: "G7akZyqAHPM?start=223", title: "263 フィードラーの理論" },
+  { id: "G7akZyqAHPM?start=246", title: "264 SL理論" },
+  { id: "G7akZyqAHPM?start=267", title: "265 パス・ゴール理論" },
+  { id: "G7akZyqAHPM?start=291", title: "266 参加型リーダーシップ" },
+  { id: "G7akZyqAHPM?start=310", title: "267 指示型リーダーシップ" },
+  { id: "G7akZyqAHPM?start=330", title: "268 支援型リーダーシップ" },
+  { id: "G7akZyqAHPM?start=350", title: "269 達成型リーダーシップ" },
+  { id: "G7akZyqAHPM?start=368", title: "270 リーダー・メンバー交換理論" },
+  { id: "G7akZyqAHPM?start=392", title: "271 外集団" },
+  { id: "G7akZyqAHPM?start=413", title: "272 内集団" },  
+      ],
+    "13. 組織間関係": [
+        { id: "G7akZyqAHPM?start=435", title: "273 環境適応" },
+  { id: "G7akZyqAHPM?start=458", title: "274 同型化" },
+  { id: "G7akZyqAHPM?start=480", title: "275 規範的同型化" },
+  { id: "G7akZyqAHPM?start=503", title: "276 強制的同型化" },
+  { id: "G7akZyqAHPM?start=526", title: "277 制度的同型化" },
+  { id: "G7akZyqAHPM?start=549", title: "278 模倣的同型化" },
+  { id: "G7akZyqAHPM?start=571", title: "279 資源依存パースペクティブ" },
+  { id: "G7akZyqAHPM?start=595", title: "280 埋め込まれた紐帯" },
+  { id: "G7akZyqAHPM?start=617", title: "281 弱い紐帯の強み" },
+
+    ],
+    "14. 組織変革と組織成長": [
+        { id: "G7akZyqAHPM?start=641", title: "282 SECIモデル" },
+  { id: "G7akZyqAHPM?start=664", title: "283 暗黙知" },
+  { id: "G7akZyqAHPM?start=681", title: "284 形式知" },
+  { id: "G7akZyqAHPM?start=698", title: "285 共同化" },
+  { id: "G7akZyqAHPM?start=716", title: "286 表出化" },
+  { id: "G7akZyqAHPM?start=733", title: "287 連結化" },
+  { id: "G7akZyqAHPM?start=753", title: "288 内面化" },
+  { id: "G7akZyqAHPM?start=770", title: "289 認知バイアス" },
+  { id: "G7akZyqAHPM?start=788", title: "290 アンカリング・バイアス" },
+  { id: "G7akZyqAHPM?start=808", title: "291 後知恵バイアス" },
+  { id: "G7akZyqAHPM?start=826", title: "292 確証バイアス" },
+  { id: "G7akZyqAHPM?start=847", title: "293 自己奉仕バイアス" },
+  { id: "G7akZyqAHPM?start=866", title: "294 グレシャムの法則" },
+  { id: "G7akZyqAHPM?start=887", title: "295 ヒューリスティック" },
+  { id: "G7akZyqAHPM?start=905", title: "296 解凍―変化―再凍結モデル" },
+  { id: "G7akZyqAHPM?start=931", title: "297 組織の成長段階" },
+  { id: "G7akZyqAHPM?start=953", title: "298 組織のライフサイクル仮説" },
+  { id: "G7akZyqAHPM?start=977", title: "299 起業者段階" },
+  { id: "G7akZyqAHPM?start=998", title: "300 共同体段階" } ,
+  { id: "HBW7bdwN7zM?start=0", title: "301 公式化段階" },
+  { id: "HBW7bdwN7zM?start=19", title: "302 精巧化段階" },
+  { id: "HBW7bdwN7zM?start=37", title: "303 個体群生態学モデル" },
+  { id: "HBW7bdwN7zM?start=59", title: "304 迷信的学習" },
+  { id: "HBW7bdwN7zM?start=79", title: "305 傍観者的学習" },
+  { id: "HBW7bdwN7zM?start=99", title: "306 社内ベンチャー" },
+  { id: "HBW7bdwN7zM?start=120", title: "307 組織スラック " },
+  { id: "HBW7bdwN7zM?start=142", title: "308 人的資源" },
+  { id: "HBW7bdwN7zM?start=162", title: "309 ラーニング学派" },
+  { id: "HBW7bdwN7zM?start=183", title: "310 ポジショニング学派" },
+  { id: "HBW7bdwN7zM?start=203", title: "311 バタフライ効果" },
+  { id: "HBW7bdwN7zM?start=223", title: "312 タックマンモデル" },
+
+      ],
+          "15. 人的資本管理": [
+  { id: "HBW7bdwN7zM?start=244", title: "313 360度評価" },
+  { id: "HBW7bdwN7zM?start=266", title: "314 36協定" },
+  { id: "HBW7bdwN7zM?start=289", title: "315 RJP" },
+  { id: "HBW7bdwN7zM?start=310", title: "316 OJT" },
+  { id: "HBW7bdwN7zM?start=330", title: "317 OffJT" },
+  { id: "HBW7bdwN7zM?start=348", title: "318 アファーマティブ・アクション" },
+  { id: "HBW7bdwN7zM?start=368", title: "319 アンラーニング" },
+  { id: "HBW7bdwN7zM?start=386", title: "320 ウェルビーイング" },
+  { id: "HBW7bdwN7zM?start=404", title: "321 エンゲージメント" },
+  { id: "HBW7bdwN7zM?start=423", title: "322 エクイティ理論" },
+  { id: "HBW7bdwN7zM?start=444", title: "323 ピグマリオン効果" },
+  { id: "HBW7bdwN7zM?start=464", title: "324 ゴーレム効果" },
+  { id: "HBW7bdwN7zM?start=483", title: "325 VUCA" },
+  { id: "HBW7bdwN7zM?start=503", title: "326 シングルループ学習" },
+  { id: "HBW7bdwN7zM?start=522", title: "327 ダブルループ学習" },
+  { id: "HBW7bdwN7zM?start=543", title: "328 有能さの罠" },
+  { id: "HBW7bdwN7zM?start=563", title: "329 タレントマネジメント" },
+  { id: "HBW7bdwN7zM?start=584", title: "330 エンパワーメント" },
+  { id: "HBW7bdwN7zM?start=602", title: "331 キャリア・アンカー" },
+  { id: "HBW7bdwN7zM?start=623", title: "332 コンピテンシー" },
+  { id: "HBW7bdwN7zM?start=643", title: "333 サクセッション・プランニング" },
+  { id: "HBW7bdwN7zM?start=662", title: "334 ジョブシェアリング" },
+  { id: "HBW7bdwN7zM?start=679", title: "335 ジョブローテーション" },
+  { id: "HBW7bdwN7zM?start=699", title: "336 ジョブ型雇用" },
+  { id: "HBW7bdwN7zM?start=720", title: "337 メンバーシップ型雇用" },
+  { id: "HBW7bdwN7zM?start=741", title: "338 パーソナリティ" },
+  { id: "HBW7bdwN7zM?start=757", title: "339 フレックスタイム制" },
+  { id: "HBW7bdwN7zM?start=775", title: "340 フロー経験" },
+  { id: "HBW7bdwN7zM?start=794", title: "341 ホーソン効果" },
+  { id: "HBW7bdwN7zM?start=814", title: "342 モチベーション" },
+  { id: "HBW7bdwN7zM?start=831", title: "343 外国人技能実習制度" },
+  { id: "HBW7bdwN7zM?start=852", title: "344 寛大化傾向" },
+  { id: "HBW7bdwN7zM?start=870", title: "345 厳格化傾向" },
+  { id: "HBW7bdwN7zM?start=889", title: "346 極端化傾向" },
+  { id: "HBW7bdwN7zM?start=908", title: "347 中心化傾向" },
+  { id: "HBW7bdwN7zM?start=925", title: "348 類似誤差" },
+  { id: "HBW7bdwN7zM?start=925", title: "349 対比誤差" },
+  { id: "HBW7bdwN7zM?start=966", title: "350 ワーク・ライフ・バランス" },
+  { id: "CMVy8qj7cxc?start=0", title: "351 ワーク・ライフ・インテグレーション" },
+  { id: "CMVy8qj7cxc?start=20", title: "352 ハロー効果" },
+  { id: "CMVy8qj7cxc?start=41", title: "353 直近効果" },
+  { id: "CMVy8qj7cxc?start=60", title: "354 技能実習" },
+  { id: "CMVy8qj7cxc?start=80", title: "355 公租公課" },
+  { id: "CMVy8qj7cxc?start=96", title: "356 職業的自己概念" },
+  { id: "CMVy8qj7cxc?start=115", title: "357 職務拡大" },
+  { id: "CMVy8qj7cxc?start=134", title: "358 職務特性" },
+  { id: "CMVy8qj7cxc?start=153", title: "359 職務再設計" },
+  { id: "CMVy8qj7cxc?start=174", title: "360 職務特性モデル" },
+  { id: "CMVy8qj7cxc?start=198", title: "361 職務満足" },
+  { id: "CMVy8qj7cxc?start=218", title: "362 信頼理論" },
+  { id: "CMVy8qj7cxc?start=240", title: "363 心理的契約" },
+  { id: "CMVy8qj7cxc?start=261", title: "364 ハーズバーグの二要因理論" },
+  { id: "CMVy8qj7cxc?start=286", title: "365 マズローの欲求段階説" },
+  { id: "CMVy8qj7cxc?start=307", title: "366 リフレーミング" },
+  { id: "CMVy8qj7cxc?start=327", title: "367 労働基準法" },
+  { id: "CMVy8qj7cxc?start=345", title: "368 労働組合法" },
+  { id: "CMVy8qj7cxc?start=367", title: "369 労働保険" },
+  { id: "CMVy8qj7cxc?start=389", title: "370 確定給付型年金" },
+  { id: "CMVy8qj7cxc?start=409", title: "371 確定給付型年金" },
+  { id: "CMVy8qj7cxc?start=431", title: "372 勤務間インターバル制度" },
+  { id: "CMVy8qj7cxc?start=451", title: "373 変形労働時間制" },
+  { id: "CMVy8qj7cxc?start=474", title: "374 高度プロフェッショナル制度" }
+     ],
+          "16. マーケティングの基礎概念": [
+  { id: "CMVy8qj7cxc?start=495", title: "375 AMA" },
+  { id: "CMVy8qj7cxc?start=513", title: "376 マーケティング1.0" },
+  { id: "CMVy8qj7cxc?start=534", title: "377 マーケティング2.0" },
+  { id: "CMVy8qj7cxc?start=554", title: "378 マーケティング3.0" },
+  { id: "CMVy8qj7cxc?start=576", title: "379 マーケティング4.0" },
+  { id: "CMVy8qj7cxc?start=598", title: "380 BtoBマーケティング" },
+  { id: "CMVy8qj7cxc?start=620", title: "381 サービス・マーケティング" },
+  { id: "CMVy8qj7cxc?start=638", title: "382 デジタル・マーケティング" },
+  { id: "CMVy8qj7cxc?start=661", title: "383 マーケティング・コンセプト" },
+  { id: "CMVy8qj7cxc?start=680", title: "384 マーケティング・ミックス" },
+  { id: "CMVy8qj7cxc?start=703", title: "385 セカンダリマーケット" },
+  { id: "CMVy8qj7cxc?start=723", title: "386 顧客ロイヤルティ" },
+  { id: "CMVy8qj7cxc?start=743", title: "387 顧客価値" },
+  { id: "CMVy8qj7cxc?start=763", title: "388 真実の瞬間" },
+  { id: "CMVy8qj7cxc?start=783", title: "389 レピュテーション" },
+      ],
+          "17. マーケティング計画とマーケティング戦略": [
+  { id: "CMVy8qj7cxc?start=801", title: "390 STP" },
+  { id: "CMVy8qj7cxc?start=824", title: "391 4P" },
+  { id: "CMVy8qj7cxc?start=843", title: "392 6R" },
+  { id: "CMVy8qj7cxc?start=866", title: "393 マーケット・アプローチ" },
+  { id: "CMVy8qj7cxc?start=889", title: "394 市場専門化" },
+  { id: "CMVy8qj7cxc?start=909", title: "395 製品専門化" },
+  { id: "CMVy8qj7cxc?start=931", title: "396 選択的専門化" },
+  { id: "CMVy8qj7cxc?start=953", title: "397 グリーンマーケティング" },
+  { id: "CMVy8qj7cxc?start=976", title: "398 ソサイエタルマーケティング" },
+  { id: "CMVy8qj7cxc?start=998", title: "399 ソーシャル・マーケティング" },
+  { id: "CMVy8qj7cxc?start=1021", title: "400 コーズリレーテッドマーケティング" },
+  { id: "QwvQ5HCXkbQ?start=0", title: "401 ソシオエコロジカル・マーケティング" },
+  { id: "QwvQ5HCXkbQ?start=23", title: "402 顧客創造型マーケティング" },
+],
+          "18. マーケティング・リサーチ": [
+  { id: "QwvQ5HCXkbQ?start=45", title: "403 RFM分析" },
+  { id: "QwvQ5HCXkbQ?start=68", title: "404 FSP" },
+  { id: "QwvQ5HCXkbQ?start=89", title: "405 IMC" },
+  { id: "QwvQ5HCXkbQ?start=108", title: "406 探索型リサーチ" },
+  { id: "QwvQ5HCXkbQ?start=130", title: "407 ギャング・サーベイ" },
+  { id: "QwvQ5HCXkbQ?start=148", title: "408 コンジョイント分析" },
+  { id: "QwvQ5HCXkbQ?start=171", title: "409 CVM" },
+  { id: "QwvQ5HCXkbQ?start=199", title: "410 セントラル・ロケーション・テスト" },
+  { id: "QwvQ5HCXkbQ?start=220", title: "411 ニューロ・マーケティング" },
+  { id: "QwvQ5HCXkbQ?start=240", title: "412 マーケティング・リサーチ" },
+  { id: "QwvQ5HCXkbQ?start=260", title: "413 モチベーション・リサーチ" },
+  { id: "QwvQ5HCXkbQ?start=279", title: "414 ユング心理学" },
+  { id: "QwvQ5HCXkbQ?start=299", title: "415 リード・ユーザー法" },
+  { id: "QwvQ5HCXkbQ?start=319", title: "416 質的研究" },
+  { id: "QwvQ5HCXkbQ?start=340", title: "417 スプリットラン" },
+  { id: "QwvQ5HCXkbQ?start=360", title: "418 ライフサイクルアプローチ" },
+  { id: "QwvQ5HCXkbQ?start=383", title: "419 ライフコースアプローチ" },
+  { id: "QwvQ5HCXkbQ?start=403", title: "420 フォーカス・グループ・インタビュー" },
+  { id: "QwvQ5HCXkbQ?start=421", title: "421 デプスインタビュー" },
+  { id: "QwvQ5HCXkbQ?start=437", title: "422 エスノグラフィー" },
+  { id: "QwvQ5HCXkbQ?start=459", title: "423 ミステリチョッパー調査" },
+  { id: "QwvQ5HCXkbQ?start=479", title: "424 サーベイ法" },
+  { id: "QwvQ5HCXkbQ?start=500", title: "425 悉皆調査" },
+  { id: "QwvQ5HCXkbQ?start=521", title: "426 観察法" },
+  { id: "QwvQ5HCXkbQ?start=539", title: "427 実験法" },
+  { id: "QwvQ5HCXkbQ?start=556", title: "428 言語連想法" },
+  { id: "QwvQ5HCXkbQ?start=576", title: "429 投影法" },
+  { id: "QwvQ5HCXkbQ?start=598", title: "430 ロールシャッハテスト" },
+  { id: "QwvQ5HCXkbQ?start=620", title: "431 文章完成法" },
+  { id: "QwvQ5HCXkbQ?start=640", title: "432 TAT" },
+  { id: "QwvQ5HCXkbQ?start=657", title: "433 検証型リサーチ" },
+  { id: "QwvQ5HCXkbQ?start=676", title: "434 一次データ" },
+  { id: "QwvQ5HCXkbQ?start=694", title: "435 二次データ" },
+  { id: "QwvQ5HCXkbQ?start=715", title: "436 間隔尺度" },
+  { id: "QwvQ5HCXkbQ?start=733", title: "437 序数尺度" },
+  { id: "QwvQ5HCXkbQ?start=753", title: "438 比例尺度" },
+  { id: "QwvQ5HCXkbQ?start=774", title: "439 名義尺度" },
+  { id: "QwvQ5HCXkbQ?start=794", title: "440 ジョハリの窓" },
+  { id: "QwvQ5HCXkbQ?start=814", title: "441 開放の窓" },
+  { id: "QwvQ5HCXkbQ?start=830", title: "442 盲点の窓" },
+  { id: "QwvQ5HCXkbQ?start=848", title: "443 隠された窓" },
+  { id: "QwvQ5HCXkbQ?start=865", title: "444 未知の窓" },
+  { id: "QwvQ5HCXkbQ?start=885", title: "445 顧客リレーションシップ" },
+  { id: "QwvQ5HCXkbQ?start=903", title: "446 リレーションシップマーケティング" },
+  { id: "QwvQ5HCXkbQ?start=922", title: "447 バイラルマーケティング" },
+  { id: "QwvQ5HCXkbQ?start=942", title: "448 AIDMA" },
+  { id: "QwvQ5HCXkbQ?start=966", title: "449 AISAS" },
+  { id: "QwvQ5HCXkbQ?start=989", title: "450 AMTUL" },
+  { id: "RuknZRt_xo4?start=0", title: "451 5A" },
+  { id: "RuknZRt_xo4?start=24", title: "452 インサイト" },
+  { id: "RuknZRt_xo4?start=41", title: "453 LTV" },
+  { id: "RuknZRt_xo4?start=60", title: "454 サービス・ドミナント・ロジック" },
+  { id: "RuknZRt_xo4?start=83", title: "455 アイ・トラッキング" },
+  { id: "RuknZRt_xo4?start=104", title: "456 インターナルマーケティング" },
+  { id: "RuknZRt_xo4?start=125", title: "457 グローバルマーケティング" },
+  { id: "RuknZRt_xo4?start=145", title: "458 ワントゥーワンマーケティング" },
+  { id: "RuknZRt_xo4?start=165", title: "459 アドボカシーマーケティング" },
+  { id: "RuknZRt_xo4?start=187", title: "460 パーミッション・マーケティング" },
+  { id: "RuknZRt_xo4?start=207", title: "461 アップセル" },
+  { id: "RuknZRt_xo4?start=225", title: "462 クロスセル" },
+  { id: "RuknZRt_xo4?start=245", title: "463 サービス・プロフィット・チェーン" },
+  { id: "RuknZRt_xo4?start=270", title: "464 カントリーオブオリジン" },
+  { id: "RuknZRt_xo4?start=290", title: "465 PLC" },
+  { id: "RuknZRt_xo4?start=315", title: "466 導入期" },
+  { id: "RuknZRt_xo4?start=334", title: "467 成長期" },
+  { id: "RuknZRt_xo4?start=352", title: "468 成熟期" },
+  { id: "RuknZRt_xo4?start=373", title: "469 衰退期" },
+  { id: "RuknZRt_xo4?start=392", title: "470 NB商品" },
+  { id: "RuknZRt_xo4?start=410", title: "471 PB商品" },
+  { id: "RuknZRt_xo4?start=429", title: "472 ダブルチョップ" },
+  { id: "RuknZRt_xo4?start=447", title: "473 アイデア・スクリーニング" },
+  { id: "RuknZRt_xo4?start=469", title: "474 アフォーダンス" },
+  { id: "RuknZRt_xo4?start=487", title: "475 リポジショニング" },
+  { id: "RuknZRt_xo4?start=508", title: "476 有形性" },
+  { id: "RuknZRt_xo4?start=524", title: "477 無形性" },
+  { id: "RuknZRt_xo4?start=543", title: "478 消滅性" },
+  { id: "RuknZRt_xo4?start=561", title: "479 OEM" },
+  { id: "RuknZRt_xo4?start=580", title: "480 バリュープロポジション" },
+  { id: "RuknZRt_xo4?start=598", title: "481 コーポレートブランディング" },
+  { id: "RuknZRt_xo4?start=618", title: "482 インターナルブランディング" },
+  { id: "RuknZRt_xo4?start=638", title: "483 コ・ブランディング" },
+  { id: "RuknZRt_xo4?start=658", title: "484 サービス・トライアングル" },
+  { id: "RuknZRt_xo4?start=679", title: "485 ブランド・エクイティ" },
+  { id: "RuknZRt_xo4?start=697", title: "486 ブランド・コミットメント" },
+  { id: "RuknZRt_xo4?start=717", title: "487 ブランド・パーソナリティ" },
+  { id: "RuknZRt_xo4?start=735", title: "488 ブランド・リポジショニング" },
+  { id: "RuknZRt_xo4?start=754", title: "489 ブランド・ロイヤルティ" },
+  { id: "RuknZRt_xo4?start=771", title: "490 ブランドイメージ" },
+  { id: "RuknZRt_xo4?start=789", title: "491 ブランドカテゴライゼーション" },
+  { id: "RuknZRt_xo4?start=809", title: "492 ライン拡張" },
+  { id: "RuknZRt_xo4?start=828", title: "493 ブランド拡張" },
+  { id: "RuknZRt_xo4?start=847", title: "494 マルチブランド" },
+  { id: "RuknZRt_xo4?start=867", title: "495 ブランドプラスグレード" },
+  { id: "RuknZRt_xo4?start=886", title: "496 ファミリーブランド" },
+  { id: "RuknZRt_xo4?start=905", title: "497 ダブルブランド" },
+  { id: "RuknZRt_xo4?start=923", title: "498 個別ブランド" },
+  { id: "RuknZRt_xo4?start=942", title: "499 ブランド・ダイリューション" },
+  { id: "RuknZRt_xo4?start=963", title: "500 ブランド・アンブレラ戦略" }            
+      ],
+          "19. 各分野に展開したマーケティング": [
+      ]
+
         };
       
         const videoListContainer = document.getElementById("videos");
         const youtubeFrame = document.getElementById("youtube-frame");
         const toggleCheckedButton = document.getElementById("toggle-checked");
         let showChecked = true;
+
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.menu').classList.toggle('show-menu');
+        });
 
         function loadChecklist() {
             return JSON.parse(localStorage.getItem("videoChecklist")) || {};
