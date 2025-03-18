@@ -122,9 +122,9 @@
 </script>
   <body>
     <header>
-      <span class="titlelogo">企業経営理論</span><br/>
+      <span class="titlelogo">企業経営理論 単語集</span>
       <button id="toggle-checked"></button>
-      <span id=checkednum>122/646</span>
+      <span id="checked-count">0</span>
         <button class="menu-toggle">☰</button>
         <nav class="menu">
             <a href="help.html">使い方</a>
@@ -873,7 +873,20 @@
             });
             toggleCheckedButton.textContent = showChecked ? "チェック済 OFF" : "チェック済 ON";
         }
+      
+          function updateCheckedCount() {
+            const checklist = JSON.parse(localStorage.getItem("videoChecklist")) || {};
+            const allItems = document.querySelectorAll(".video-item input").length;
+            const checkedItems = Object.values(checklist).filter(Boolean).length;
+            const percentage = allItems > 0 ? ((checkedItems / allItems) * 100).toFixed(1) : 0;
+            document.getElementById("checked-count").textContent = `チェック済み: ${checkedItems} (${percentage}%)`;
+        }          
+          function saveChecklist(checklist) {
+              localStorage.setItem("videoChecklist", JSON.stringify(checklist));
+              updateCheckedCount();
+          }
 
+document.addEventListener("DOMContentLoaded", updateCheckedCount);
         function renderVideoList() {
             const checklist = loadChecklist();
             //videoListContainer.innerHTML = "";
