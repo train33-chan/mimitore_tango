@@ -104,12 +104,11 @@
             background-color: #f0f0f0;
         }
       
-        #toggle-checked{
-          text-align: center;
-          font-weight: bold;
-      
+        #toggle-checked {
       }
-      
+      .titlelogo {
+        width:40%;
+      }
     </style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -123,19 +122,22 @@
 </script>
   <body>
     <header>
-      企業経営理論　単語チェックリスト
-      
+      <span class="titlelogo">企業経営理論</span><br/>
+      <button id="toggle-checked"></button>
+      一問一答
+      <span id=checkednum>122/646</span>
         <button class="menu-toggle">☰</button>
         <nav class="menu">
             <a href="help.html">使い方</a>
-            <a href="https://www.youtube.com/watch?v=zm22lFSSxTI&list=PLYzY_atXcQ728-5f_ChoRWDdqHqdL4r9v&index=2">企業経営理論 1問1答 </a>
-      </nav></header>    <div id="video-player">
+            <a href="https://www.youtube.com/watch?v=zm22lFSSxTI&list=PLYzY_atXcQ728-5f_ChoRWDdqHqdL4r9v&index=1">企業経営理論 1問1答 </a>
+      </nav></header>    
+      
+    <div id="video-player">
         <iframe id="youtube-frame" src="https://www.youtube.com/embed/1YrqNWNMrmE" frameborder="0" allowfullscreen></iframe>
     </div>
     <div id="video-list">
         <div id="videos"></div>
     </div>
-          <button id="toggle-checked"></button>
 
     
     <script>
@@ -870,12 +872,12 @@
                     item.style.display = "flex";
                 }
             });
-            toggleCheckedButton.textContent = showChecked ? "チェック済みを非表示" : "チェック済みを表示";
+            toggleCheckedButton.textContent = showChecked ? "チェック済 OFF" : "チェック済 ON";
         }
 
         function renderVideoList() {
             const checklist = loadChecklist();
-            videoListContainer.innerHTML = "";
+            //videoListContainer.innerHTML = "";
             // videoListContainer.appendChild(toggleCheckedButton);
 
             Object.keys(videoCategories).forEach(category => {
