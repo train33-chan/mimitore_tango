@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>企業経営理論 単語暗記</title>
     <style>
         body {
@@ -12,12 +13,15 @@
             height: 100vh;
             margin: 0;
         }
+        hr{
+            border: 0.2px solid #ccc; 
+      }
         header {
-            background-color: #333;
+            background-color: #c13e1a;
             color: white;
             padding: 15px;
             text-align: left;
-            font-size: 0.8em;
+            font-size: 1em;
             font-weight: bold;
             display: flex;
             justify-content: space-between;
@@ -32,7 +36,7 @@
             color: white;
         }
         .menu {
-            font-size:0.8em;
+            font-size:0.9em;
             text-align:left;
             display: none;
             position: absolute;
@@ -77,7 +81,7 @@
             margin: 10px 0;
             cursor: pointer;
             font-weight: bold;
-            background-color: #ddd;
+            background-color: #FDEFCD;
             padding: 5px;
             border-radius: 5px;
         }
@@ -90,7 +94,7 @@
             align-items: center;
             cursor: pointer;
             padding: 5px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #FDEFCD;
             background-color: #fff;
         }
         .video-item input {
@@ -128,8 +132,26 @@
         <button class="menu-toggle">☰</button>
         <nav class="menu">
             <a href="help.html">使い方</a>
+        <hr>
             <a href="https://www.youtube.com/watch?v=zm22lFSSxTI&list=PLYzY_atXcQ728-5f_ChoRWDdqHqdL4r9v&index=1">企業経営理論 1問1答 </a>
-      </nav></header>    
+            <a href="https://www.youtube.com/watch?v=jRvX1hZ2O28&list=PLYzY_atXcQ73g9C_CgSmQNHR3UqStbTtr&index=1">企業経営理論 正誤問題判定</a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=0sIazczqGog&list=PLYzY_atXcQ70x9eKceKojqAEhLqx76tRL&index=1">経営情報システム 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=aVjUtW1ubyM&list=PLYzY_atXcQ70ix82EVFxIat-ACoKZlKcc&index=1">経営情報システム 正誤問題判定</a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=eMBSK7_34rQ&list=PLYzY_atXcQ725HX8xt0bund76e6iHFYYO&index=1">運営管理 1問1答 </a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=JqUrdZsTJpY&list=PLYzY_atXcQ737ly3LGEUG_il6tfU_F0ul&index=1">経営法務 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=yr_0D0mciY0&list=PLYzY_atXcQ72_MCO0Okqv_O-dP-ri01Mw&index=1">経営法務 正誤問題判定</a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=AjpsK0CK-Kw&list=PLYzY_atXcQ703Av9oC8yN3b_CY3v5lbOU&index=1">経済学・経済政策 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=4ZnaWbpJwYI&list=PLYzY_atXcQ72b7gIEQz1-jpSz7W-K2E0o&index=1">経済学・経済政策 正誤問題判定</a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=QaQsg5BdP8E&list=PLYzY_atXcQ73O0faL5nWa-tvTJX5hI_Zq&index=1">財務・会計 1問1答 </a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=yEUMNYjEPqU&list=PLYzY_atXcQ73F6yXsGSWIIKky31bWzIpC&index=1">中小企業経営・政策 1問1答 </a>
+
+    </nav></header>    
       
     <div id="video-player">
         <iframe id="youtube-frame" src="https://www.youtube.com/embed/1YrqNWNMrmE" frameborder="0" allowfullscreen></iframe>
@@ -871,7 +893,7 @@
                     item.style.display = "flex";
                 }
             });
-            toggleCheckedButton.textContent = showChecked ? "チェック済 OFF" : "チェック済 ON";
+            toggleCheckedButton.innerHTML= showChecked ? "<i class='fa-solid fa-eye-slash'></i>  OFF" : "<i class='fa-solid fa-eye'> ON";
         }
       
           function updateCheckedCount() {
@@ -879,7 +901,7 @@
             const allItems = document.querySelectorAll(".video-item input").length;
             const checkedItems = Object.values(checklist).filter(Boolean).length;
             const percentage = allItems > 0 ? ((checkedItems / allItems) * 100).toFixed(1) : 0;
-            document.getElementById("checked-count").textContent = `チェック済み: ${checkedItems} (${percentage}%)`;
+            document.getElementById("checked-count").innerHTML = `<i class="fa-solid fa-square-check"></i> ${checkedItems} (${percentage}%)`;
         }          
           function saveChecklist(checklist) {
               localStorage.setItem("videoChecklist", JSON.stringify(checklist));
