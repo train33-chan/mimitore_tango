@@ -16,8 +16,8 @@
             background-color: #333;
             color: white;
             padding: 15px;
-            text-align: center;
-            font-size: 1em;
+            text-align: left;
+            font-size: 0.8em;
             font-weight: bold;
             display: flex;
             justify-content: space-between;
@@ -103,6 +103,13 @@
         .video-item:hover {
             background-color: #f0f0f0;
         }
+      
+        #toggle-checked{
+          text-align: center;
+          font-weight: bold;
+      
+      }
+      
     </style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -116,18 +123,20 @@
 </script>
   <body>
     <header>
-        企業経緯理論　単語チェックリスト
+      企業経営理論　単語チェックリスト
+      
         <button class="menu-toggle">☰</button>
         <nav class="menu">
             <a href="help.html">使い方</a>
             <a href="https://www.youtube.com/watch?v=zm22lFSSxTI&list=PLYzY_atXcQ728-5f_ChoRWDdqHqdL4r9v&index=2">企業経営理論 1問1答 </a>
-        </nav>    </header>    <div id="video-player">
+      </nav></header>    <div id="video-player">
         <iframe id="youtube-frame" src="https://www.youtube.com/embed/1YrqNWNMrmE" frameborder="0" allowfullscreen></iframe>
     </div>
     <div id="video-list">
-        <button id="toggle-checked"></button>
         <div id="videos"></div>
     </div>
+          <button id="toggle-checked"></button>
+
     
     <script>
         const videoCategories = {
@@ -867,7 +876,7 @@
         function renderVideoList() {
             const checklist = loadChecklist();
             videoListContainer.innerHTML = "";
-            videoListContainer.appendChild(toggleCheckedButton);
+            // videoListContainer.appendChild(toggleCheckedButton);
 
             Object.keys(videoCategories).forEach(category => {
                 const categoryDiv = document.createElement("div");
