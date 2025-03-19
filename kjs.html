@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>経営情報システム 単語チェック</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        hr{
+            border: 0.2px solid #ccc; 
+      }
+        header {
+            background-color: #c13e1a;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        .menu-toggle {
+            font-size: 1.5em;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+        }
+        .menu {
+            font-size:0.9em;
+            text-align:left;
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            background-color: #444;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .menu a {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background-color: #555;
+        }
+        .show-menu {
+            display: block;
+        }
+      #video-player {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+        #video-player iframe {
+            width: 100%;
+            height: 100%;
+            max-height: 50vh;
+        }
+        #video-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .category {
+            margin: 10px 0;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #FDEFCD;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .subcategory {
+            margin-left: 10px;
+            display: none;
+        }
+        .video-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 5px;
+            border-bottom: 1px solid #FDEFCD;
+            background-color: #fff;
+        }
+        .video-item input {
+            margin-right: 10px;
+        }
+        .video-item span.checked {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .video-item:hover {
+            background-color: #f0f0f0;
+        }
+      
+        #toggle-checked {
+      }
+      .titlelogo {
+        width:40%;
+      }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JECR9XS11F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JECR9XS11F');
+</script>
+  <body>
+    <header>
+      <span class="titlelogo">経営情報システム 単語集</span>
+      <button id="toggle-checked"></button>
+      <span id="checked-count">0</span>
+        <button class="menu-toggle">☰</button>
+        <nav class="menu">
+            <a href="help.html">使い方</a>
+        <hr>
+            <a href="kkr.html">企業経営理論 単語チェック</a>
+            <a href="https://www.youtube.com/watch?v=zm22lFSSxTI&list=PLYzY_atXcQ728-5f_ChoRWDdqHqdL4r9v&index=1">企業経営理論 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=jRvX1hZ2O28&list=PLYzY_atXcQ73g9C_CgSmQNHR3UqStbTtr&index=1">企業経営理論 正誤問題判定</a>
+        <hr>
+            <a href="kjs.html">経営情報システム 単語チェック</a>
+            <a href="https://www.youtube.com/watch?v=0sIazczqGog&list=PLYzY_atXcQ70x9eKceKojqAEhLqx76tRL&index=1">経営情報システム 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=aVjUtW1ubyM&list=PLYzY_atXcQ70ix82EVFxIat-ACoKZlKcc&index=1">経営情報システム 正誤問題判定</a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=eMBSK7_34rQ&list=PLYzY_atXcQ725HX8xt0bund76e6iHFYYO&index=1">運営管理 1問1答 </a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=JqUrdZsTJpY&list=PLYzY_atXcQ737ly3LGEUG_il6tfU_F0ul&index=1">経営法務 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=yr_0D0mciY0&list=PLYzY_atXcQ72_MCO0Okqv_O-dP-ri01Mw&index=1">経営法務 正誤問題判定</a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=AjpsK0CK-Kw&list=PLYzY_atXcQ703Av9oC8yN3b_CY3v5lbOU&index=1">経済学・経済政策 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=4ZnaWbpJwYI&list=PLYzY_atXcQ72b7gIEQz1-jpSz7W-K2E0o&index=1">経済学・経済政策 正誤問題判定</a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=QaQsg5BdP8E&list=PLYzY_atXcQ73O0faL5nWa-tvTJX5hI_Zq&index=1">財務・会計 1問1答 </a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=yEUMNYjEPqU&list=PLYzY_atXcQ73F6yXsGSWIIKky31bWzIpC&index=1">中小企業経営・政策 1問1答 </a>
+
+    </nav></header>    
+      
+    <div id="video-player">
+        <iframe id="youtube-frame" src="https://www.youtube.com/embed/4aNUW4BTkVk" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="video-list">
+        <div id="videos"></div>
+    </div>
+
+    
+    <script>
+        const videoCategories = {
+            "1.情報処理の基礎技術": [
+  { id: "4aNUW4BTkVk?start=0", title: "001 ASCIIコード" },
+  { id: "4aNUW4BTkVk?start=22", title: "002 AVI" },
+  { id: "4aNUW4BTkVk?start=38", title: "003 BD-R" },
+  { id: "4aNUW4BTkVk?start=54", title: "004 BD-ROM" },
+  { id: "4aNUW4BTkVk?start=66", title: "005 BIOS" },
+  { id: "4aNUW4BTkVk?start=82", title: "006 BMP" },
+  { id: "4aNUW4BTkVk?start=95", title: "007 Bluetooth" },
+  { id: "4aNUW4BTkVk?start=119", title: "008 C#" },
+  { id: "4aNUW4BTkVk?start=131", title: "009 C" },
+  { id: "4aNUW4BTkVk?start=149", title: "010 CPU" },
+  { id: "4aNUW4BTkVk?start=164", title: "011 DVD-RAM" },
+  { id: "4aNUW4BTkVk?start=180", title: "012 DVD-RW" },
+  { id: "4aNUW4BTkVk?start=197", title: "013 DVI" },
+  { id: "4aNUW4BTkVk?start=211", title: "014 EUC" },
+  { id: "4aNUW4BTkVk?start=229", title: "015 Eclipse" },
+  { id: "4aNUW4BTkVk?start=243", title: "016 FLOPS" },
+  { id: "4aNUW4BTkVk?start=261", title: "017 GIF" },
+  { id: "4aNUW4BTkVk?start=279", title: "018 HDD" },
+  { id: "4aNUW4BTkVk?start=292", title: "019 IDE(統合開発環境)" },
+  { id: "4aNUW4BTkVk?start=314", title: "020 IEEE1284" },
+  { id: "4aNUW4BTkVk?start=331", title: "021 IrDA" },
+  { id: "4aNUW4BTkVk?start=344", title: "022 JPEG" },
+  { id: "4aNUW4BTkVk?start=359", title: "023 Java" },
+  { id: "4aNUW4BTkVk?start=376", title: "024 MIPS" },
+  { id: "4aNUW4BTkVk?start=391", title: "025 MP3" },
+  { id: "4aNUW4BTkVk?start=406", title: "026 MP4" },
+  { id: "4aNUW4BTkVk?start=425", title: "027 NAND型" },
+  { id: "4aNUW4BTkVk?start=444", title: "028 NOR型" },
+  { id: "4aNUW4BTkVk?start=462", title: "029 OS" },
+  { id: "4aNUW4BTkVk?start=483", title: "030 PCI Express" },
+  { id: "4aNUW4BTkVk?start=500", title: "031 PCM" },
+  { id: "4aNUW4BTkVk?start=519", title: "032 PNG" },
+  { id: "4aNUW4BTkVk?start=530", title: "033 Perl" },
+  { id: "4aNUW4BTkVk?start=547", title: "034 Python" },
+  { id: "4aNUW4BTkVk?start=563", title: "035 QWERTY配列" },
+  { id: "4aNUW4BTkVk?start=579", title: "036 RAID" },
+  { id: "4aNUW4BTkVk?start=601", title: "037 SCSI" },
+  { id: "4aNUW4BTkVk?start=617", title: "038 SSD" },
+  { id: "4aNUW4BTkVk?start=635", title: "039 Shift-JIS コード" },
+  { id: "4aNUW4BTkVk?start=646", title: "040 Standard-A" },
+  { id: "4aNUW4BTkVk?start=661", title: "041 Type-C" },
+  { id: "4aNUW4BTkVk?start=679", title: "042 Unicode" },
+  { id: "4aNUW4BTkVk?start=695", title: "043 USB 2.0" },
+  { id: "4aNUW4BTkVk?start=716", title: "044 USB 3.1" },
+  { id: "4aNUW4BTkVk?start=733", title: "045 UTF-8" },
+  { id: "4aNUW4BTkVk?start=749", title: "046 WXGA" },
+  { id: "4aNUW4BTkVk?start=771", title: "047 WUXGA" },
+  { id: "4aNUW4BTkVk?start=789", title: "048 e-SATA" },
+  { id: "4aNUW4BTkVk?start=805", title: "049 インタプリタ" },
+  { id: "4aNUW4BTkVk?start=820", title: "050 インタプリタ言語" },
+  { id: "yoqoTveqLSQ?start=0", title: "051 オブジェクトファイル" },
+  { id: "yoqoTveqLSQ?start=17", title: "052 カレントディレクトリ" },
+  { id: "yoqoTveqLSQ?start=30", title: "053 カーネル" },
+  { id: "yoqoTveqLSQ?start=48", title: "054 ガーベージコレクション" },
+  { id: "yoqoTveqLSQ?start=65", title: "055 キャッシング" },
+  { id: "yoqoTveqLSQ?start=85", title: "056 クロック" },
+  { id: "yoqoTveqLSQ?start=103", title: "057 グラフィックボード" },
+  { id: "yoqoTveqLSQ?start=124", title: "058 コントロールバス" },
+  { id: "yoqoTveqLSQ?start=141", title: "059 コンパイラ" },
+  { id: "yoqoTveqLSQ?start=156", title: "060 コンパクション" },
+  { id: "yoqoTveqLSQ?start=174", title: "061 シェル" },
+  { id: "yoqoTveqLSQ?start=192", title: "062 システムバス" },
+  { id: "yoqoTveqLSQ?start=210", title: "063 ジャイロセンサー" },
+  { id: "yoqoTveqLSQ?start=226", title: "064 ストライピング" },
+  { id: "yoqoTveqLSQ?start=242", title: "065 スプーリング" },
+  { id: "yoqoTveqLSQ?start=261", title: "066 スループット" },
+  { id: "yoqoTveqLSQ?start=277", title: "067 スワッピング" },
+  { id: "yoqoTveqLSQ?start=297", title: "068 ソースプログラム" },
+  { id: "yoqoTveqLSQ?start=316", title: "069 チャットボット" },
+  { id: "yoqoTveqLSQ?start=333", title: "070 デバイスドライバ" },
+  { id: "yoqoTveqLSQ?start=349", title: "071 データバス" },
+  { id: "yoqoTveqLSQ?start=365", title: "072 バッチ処理" },
+  { id: "yoqoTveqLSQ?start=382", title: "073 ファームウェア" },
+  { id: "yoqoTveqLSQ?start=400", title: "074 フラッシュメモリ" },
+  { id: "yoqoTveqLSQ?start=418", title: "075 フリーウェア" },
+  { id: "yoqoTveqLSQ?start=437", title: "076 プラグインソフト" },
+  { id: "yoqoTveqLSQ?start=454", title: "077 ベクターデータ" },
+  { id: "yoqoTveqLSQ?start=476", title: "078 ホットスワップ" },
+  { id: "yoqoTveqLSQ?start=493", title: "079 マザーボード" },
+  { id: "yoqoTveqLSQ?start=514", title: "080 ミドルウェア" },
+  { id: "yoqoTveqLSQ?start=536", title: "081 ミラーリング" },
+  { id: "yoqoTveqLSQ?start=553", title: "082 メモリモジュール" },
+  { id: "yoqoTveqLSQ?start=573", title: "083 メモリリーク" },
+  { id: "yoqoTveqLSQ?start=588", title: "084 ユーティリティプログラム" },
+  { id: "yoqoTveqLSQ?start=605", title: "085 ライブラリファイル" },
+  { id: "yoqoTveqLSQ?start=622", title: "086 リンカ" },
+  { id: "yoqoTveqLSQ?start=639", title: "087 DRAM" },
+  { id: "yoqoTveqLSQ?start=655", title: "088 SRAM" },
+  { id: "yoqoTveqLSQ?start=682", title: "089 DDR5" },
+  { id: "yoqoTveqLSQ?start=691", title: "090 主記憶装置" },
+  { id: "yoqoTveqLSQ?start=708", title: "091 仮想記憶" },
+  { id: "yoqoTveqLSQ?start=727", title: "092 抵抗膜方式" },
+  { id: "yoqoTveqLSQ?start=746", title: "093 赤外線方式" },
+  { id: "yoqoTveqLSQ?start=764", title: "094 静電容量方式" },
+  { id: "yoqoTveqLSQ?start=787", title: "095 揮発性メモリ" },
+  { id: "yoqoTveqLSQ?start=805", title: "096 有機ELディスプレイ" },
+  { id: "yoqoTveqLSQ?start=825", title: "097 磁気センサー" },
+  { id: "yoqoTveqLSQ?start=846", title: "098 近接センサー" },
+  { id: "yoqoTveqLSQ?start=863", title: "099 絶対パス" },
+  { id: "yoqoTveqLSQ?start=879", title: "100 相対パス" },
+      ],
+  "2. 情報処理システムと関連技術": [
+  { id: "BBFTs-rY9EE?start=0", title: "101 HTML" },
+  { id: "BBFTs-rY9EE?start=15", title: "102 CSS" },
+  { id: "BBFTs-rY9EE?start=31", title: "103 JavaScript" },
+  { id: "BBFTs-rY9EE?start=48", title: "104 XML" },
+  { id: "BBFTs-rY9EE?start=63", title: "105 SOAP" },
+  { id: "BBFTs-rY9EE?start=78", title: "106 Ajax" },
+  { id: "BBFTs-rY9EE?start=102", title: "107 SVG" },
+  { id: "BBFTs-rY9EE?start=120", title: "108 PHP" },
+  { id: "BBFTs-rY9EE?start=142", title: "109 Webサーバ" },
+  { id: "BBFTs-rY9EE?start=162", title: "110 Webスクレイピング" },
+  { id: "BBFTs-rY9EE?start=178", title: "111 FTP" },
+  { id: "BBFTs-rY9EE?start=198", title: "112 CMS" },
+  { id: "BBFTs-rY9EE?start=216", title: "113 UI" },
+  { id: "BBFTs-rY9EE?start=233", title: "114 UX" },
+  { id: "BBFTs-rY9EE?start=249", title: "115 ユーザビリティ" },
+  { id: "BBFTs-rY9EE?start=268", title: "116 ウェブアクセシビリティ" },
+  { id: "BBFTs-rY9EE?start=288", title: "117 光の三原色" },
+  { id: "BBFTs-rY9EE?start=305", title: "118 色の三原色" },
+  { id: "BBFTs-rY9EE?start=321", title: "119 Cookie" },
+  { id: "BBFTs-rY9EE?start=347", title: "120 パブリッククラウド" },
+  { id: "BBFTs-rY9EE?start=366", title: "121 プライベートクラウド" },
+  { id: "BBFTs-rY9EE?start=384", title: "122 ハイブリッドクラウド" },
+  { id: "BBFTs-rY9EE?start=403", title: "123 IaaS" },
+  { id: "BBFTs-rY9EE?start=421", title: "124 PaaS" },
+  { id: "BBFTs-rY9EE?start=439", title: "125 SaaS" },
+  { id: "BBFTs-rY9EE?start=457", title: "126 DaaS" },
+  { id: "BBFTs-rY9EE?start=476", title: "127 オンプレミス型クラウド" },
+  { id: "BBFTs-rY9EE?start=497", title: "128 ホステッド型クラウド" },
+  { id: "BBFTs-rY9EE?start=516", title: "129 エッジクラウド" },
+  { id: "BBFTs-rY9EE?start=535", title: "130 コミュニティクラウド" },
+  { id: "BBFTs-rY9EE?start=553", title: "131 リフト＆シフト" },
+  { id: "BBFTs-rY9EE?start=571", title: "132 スケールアウト" },
+  { id: "BBFTs-rY9EE?start=587", title: "133 スケールアップ" },
+  { id: "BBFTs-rY9EE?start=605", title: "134 ハイパーバイザー型" },
+  { id: "BBFTs-rY9EE?start=624", title: "135 コンテナ型" },
+  { id: "BBFTs-rY9EE?start=642", title: "136 シンクライアント" },
+  { id: "BBFTs-rY9EE?start=661", title: "137 グリッドコンピューティング" },
+  { id: "BBFTs-rY9EE?start=679", title: "138 エッジコンピューティング" },
+  { id: "BBFTs-rY9EE?start=697", title: "139 量子コンピューティング" },
+  { id: "BBFTs-rY9EE?start=717", title: "140 クラウドコントローラ" },
+  { id: "BBFTs-rY9EE?start=736", title: "141 マッシュアップ" },
+  { id: "BBFTs-rY9EE?start=753", title: "142 カプセル化" },
+  { id: "BBFTs-rY9EE?start=771", title: "143 継承" },
+  { id: "BBFTs-rY9EE?start=788", title: "144 多相性" },
+  { id: "BBFTs-rY9EE?start=804", title: "145 オーバーライド" },
+  { id: "BBFTs-rY9EE?start=822", title: "146 オーバーロード" },
+  { id: "BBFTs-rY9EE?start=840", title: "147 正規表現" },
+  { id: "BBFTs-rY9EE?start=857", title: "148 プレゼンテーション層" },
+  { id: "BBFTs-rY9EE?start=878", title: "149 ファンクション層" },
+  { id: "BBFTs-rY9EE?start=900", title: "150 データベースアクセス層" },
+  { id: "yB0RrwiwMKI?start=0", title: "151 ETL処理" },
+  { id: "yB0RrwiwMKI?start=20", title: "152 シングルサインオン" },
+  { id: "yB0RrwiwMKI?start=37", title: "153 RFID" },
+  { id: "yB0RrwiwMKI?start=56", title: "154 QRコード" },
+  { id: "yB0RrwiwMKI?start=79", title: "155 コロケーション" },
+  { id: "yB0RrwiwMKI?start=98", title: "156 SMTP" },
+  { id: "yB0RrwiwMKI?start=115", title: "157 POP" },
+  { id: "yB0RrwiwMKI?start=131", title: "158 IMAP" },
+  { id: "yB0RrwiwMKI?start=148", title: "159 ICMP" },
+  { id: "yB0RrwiwMKI?start=168", title: "160 NNTP" },
+  { id: "yB0RrwiwMKI?start=184", title: "161 NTP" },
+  { id: "yB0RrwiwMKI?start=201", title: "162 MIME" },
+  { id: "yB0RrwiwMKI?start=217", title: "163 DNS" },
+  { id: "yB0RrwiwMKI?start=237", title: "164 DHCP" },
+  { id: "yB0RrwiwMKI?start=258", title: "165 SNMP" },
+  { id: "yB0RrwiwMKI?start=274", title: "166 TCP" },
+  { id: "yB0RrwiwMKI?start=292", title: "167 UDP" },
+  { id: "yB0RrwiwMKI?start=309", title: "168 Green by IT" },
+  { id: "yB0RrwiwMKI?start=329", title: "169 Green of IT" },
+  { id: "yB0RrwiwMKI?start=346", title: "170 PUE" },
+  { id: "yB0RrwiwMKI?start=367", title: "171 ホワイトデータセンター" },
+  { id: "yB0RrwiwMKI?start=384", title: "172 グリーンデータセンター" },
+  { id: "yB0RrwiwMKI?start=401", title: "173 ハウジングサービス" },
+  { id: "yB0RrwiwMKI?start=421", title: "174 ホスティングサービス" },
+  { id: "yB0RrwiwMKI?start=440", title: "175 クラウドサービス" },
+  { id: "yB0RrwiwMKI?start=458", title: "176 LDAP" },
+  { id: "yB0RrwiwMKI?start=476", title: "177 共通鍵方式" },
+  { id: "yB0RrwiwMKI?start=492", title: "178 公開鍵暗号方式" },
+  { id: "yB0RrwiwMKI?start=521", title: "179 セッション鍵方式" },
+  { id: "yB0RrwiwMKI?start=547", title: "180 CA(認証局)" },
+  { id: "yB0RrwiwMKI?start=568", title: "181 CRL" },
+  { id: "yB0RrwiwMKI?start=584", title: "182 PKI" },
+  { id: "yB0RrwiwMKI?start=605", title: "183 電子証明書" },
+  { id: "yB0RrwiwMKI?start=623", title: "184 デジタル署名" },
+  { id: "yB0RrwiwMKI?start=641", title: "185 AES" },
+  { id: "yB0RrwiwMKI?start=661", title: "186 RSA" },
+  { id: "yB0RrwiwMKI?start=679", title: "187 TKIP" },
+  { id: "yB0RrwiwMKI?start=699", title: "188 WPA" },
+  { id: "yB0RrwiwMKI?start=717", title: "189 WPA2" },
+  { id: "yB0RrwiwMKI?start=734", title: "190 CCMP" },
+  { id: "yB0RrwiwMKI?start=755", title: "191 OCSP" },
+  { id: "yB0RrwiwMKI?start=775", title: "192 S/MIME" },
+  { id: "yB0RrwiwMKI?start=795", title: "193 二段階認証" },
+  { id: "yB0RrwiwMKI?start=813", title: "194 二要素認証" },
+  { id: "yB0RrwiwMKI?start=834", title: "195 チャレンジレスポンス認証" },
+  { id: "yB0RrwiwMKI?start=855", title: "196 ハードウェアトークン" },
+  { id: "yB0RrwiwMKI?start=871", title: "197 パスキー認証" },
+  { id: "yB0RrwiwMKI?start=890", title: "198 リスクベース認証" },
+  { id: "yB0RrwiwMKI?start=909", title: "199 バイオメトリクス" },
+  { id: "yB0RrwiwMKI?start=929", title: "200 ゼロトラスト" },
+  { id: "jHTE_j61I38?start=0", title: "201 Common Criteria" },
+  { id: "jHTE_j61I38?start=16", title: "202 SSL/TLS" },
+  { id: "jHTE_j61I38?start=33", title: "203 EVSSL" },
+  { id: "jHTE_j61I38?start=49", title: "204 機密性、完全性、可用性" },
+  { id: "jHTE_j61I38?start=74", title: "205 MAC" },
+  { id: "jHTE_j61I38?start=92", title: "206 HMAC" },
+  { id: "jHTE_j61I38?start=110", title: "207 シャドーIT" },
+  { id: "jHTE_j61I38?start=126", title: "208 サイバーキルチェーン" },
+  { id: "jHTE_j61I38?start=146", title: "209 セキュリティ・バイ・デザイン" },
+  { id: "jHTE_j61I38?start=163", title: "210 エクスプロイトキット" },
+  { id: "jHTE_j61I38?start=179", title: "211 バックドア" },
+  { id: "jHTE_j61I38?start=195", title: "212 RaaS" },
+  { id: "jHTE_j61I38?start=219", title: "213 レインボーテーブル攻撃" },
+  { id: "jHTE_j61I38?start=238", title: "214 ゼロデイ攻撃" },
+  { id: "jHTE_j61I38?start=255", title: "215 クリックジャッキング" },
+  { id: "jHTE_j61I38?start=272", title: "216 クリプトジャッキング" },
+  { id: "jHTE_j61I38?start=288", title: "217 クロスサイト・スクリプティング" },
+  { id: "jHTE_j61I38?start=306", title: "218 クロスサイト・リクエスト・フォージェリ" },
+  { id: "jHTE_j61I38?start=324", title: "219 セッションハイジャック" },
+  { id: "jHTE_j61I38?start=339", title: "220 サイドチャネル攻撃" },
+  { id: "jHTE_j61I38?start=358", title: "221 DoS攻撃" },
+  { id: "jHTE_j61I38?start=375", title: "222 DDoS攻撃" },
+  { id: "jHTE_j61I38?start=392", title: "223 リプレイ攻撃" },
+  { id: "jHTE_j61I38?start=407", title: "224 CVSS" },
+  { id: "jHTE_j61I38?start=424", title: "225 CVE" },
+  { id: "jHTE_j61I38?start=439", title: "226 CSIRT" },
+  { id: "jHTE_j61I38?start=456", title: "227 PSIRT" },
+  { id: "jHTE_j61I38?start=473", title: "228 3Dセキュア" },
+  { id: "jHTE_j61I38?start=489", title: "229 SECURITY ACTION" },
+  { id: "jHTE_j61I38?start=507", title: "230 SIEM" },
+  { id: "jHTE_j61I38?start=525", title: "231 SMIL" },
+            ],
+  "3. データベース": [
+  { id: "jHTE_j61I38?start=546", title: "232 ACID特性" },
+  { id: "jHTE_j61I38?start=579", title: "233 BIツール" },
+  { id: "jHTE_j61I38?start=595", title: "234 JSON形式" },
+  { id: "jHTE_j61I38?start=613", title: "235 XML形式" },
+  { id: "jHTE_j61I38?start=633", title: "236 YAML形式" },
+  { id: "jHTE_j61I38?start=653", title: "237 SQL" },
+  { id: "jHTE_j61I38?start=670", title: "238 リレーショナルDB" },
+  { id: "jHTE_j61I38?start=691", title: "239 MySQL" },
+  { id: "jHTE_j61I38?start=707", title: "240 NoSQL" },
+  { id: "jHTE_j61I38?start=724", title: "241 REBUILD命令" },
+  { id: "jHTE_j61I38?start=743", title: "242 インメモリデータベース" },
+  { id: "jHTE_j61I38?start=763", title: "243 カラムナーデータベース" },
+  { id: "jHTE_j61I38?start=779", title: "244 キー・バリュー型DB" },
+  { id: "jHTE_j61I38?start=795", title: "245 ストアドプロシージャ" },
+  { id: "jHTE_j61I38?start=813", title: "246 データウェアハウス" },
+  { id: "jHTE_j61I38?start=830", title: "247 データクレンジング" },
+  { id: "jHTE_j61I38?start=848", title: "248 データスワンプ" },
+  { id: "jHTE_j61I38?start=867", title: "249 データプール" },
+  { id: "jHTE_j61I38?start=887", title: "250 データマイグレーション" },
+  { id: "-G8MLxl5bLE?start=0", title: "251 データマイニング" },
+  { id: "-G8MLxl5bLE?start=18", title: "252 データマート" },
+  { id: "-G8MLxl5bLE?start=39", title: "253 データレイク" },
+  { id: "-G8MLxl5bLE?start=56", title: "254 トランザクション" },
+  { id: "-G8MLxl5bLE?start=73", title: "255 トランザクションテーブル" },
+  { id: "-G8MLxl5bLE?start=91", title: "256 トリガ" },
+  { id: "-G8MLxl5bLE?start=106", title: "257 ネットワーク型DB" },
+  { id: "-G8MLxl5bLE?start=127", title: "258 マスタテーブル" },
+  { id: "-G8MLxl5bLE?start=144", title: "259 リポジトリ" },
+  { id: "-G8MLxl5bLE?start=159", title: "260 リレーショナルデータベース" },
+  { id: "-G8MLxl5bLE?start=177", title: "261 レプリケーション" },
+  { id: "-G8MLxl5bLE?start=193", title: "262 ロック" },
+  { id: "-G8MLxl5bLE?start=208", title: "263 ロック粒度" },
+  { id: "-G8MLxl5bLE?start=225", title: "264 ロールバック" },
+  { id: "-G8MLxl5bLE?start=239", title: "265 ロールフォワード" },
+  { id: "-G8MLxl5bLE?start=256", title: "266 セマフォ" },
+  { id: "-G8MLxl5bLE?start=274", title: "267 半構造化データ" },
+  { id: "-G8MLxl5bLE?start=291", title: "268 構造化データ" },
+  { id: "-G8MLxl5bLE?start=306", title: "269 非構造化データ" },
+  { id: "-G8MLxl5bLE?start=322", title: "270 正規化" },
+  { id: "-G8MLxl5bLE?start=339", title: "271 第1正規形" },
+  { id: "-G8MLxl5bLE?start=354", title: "272 第2正規形" },
+  { id: "-G8MLxl5bLE?start=372", title: "273 第3正規形" },
+  { id: "-G8MLxl5bLE?start=388", title: "274 非正規形" },
+  { id: "-G8MLxl5bLE?start=403", title: "275 主キー" },
+  { id: "-G8MLxl5bLE?start=419", title: "276 外部キー" },
+  { id: "-G8MLxl5bLE?start=433", title: "277 階層型DB" } 
+      ],
+  "4. 通信ネットワーク": [
+  { id: "-G8MLxl5bLE?start=451", title: "278 BIND" },
+  { id: "-G8MLxl5bLE?start=467", title: "279 CSMA/CA" },
+  { id: "-G8MLxl5bLE?start=485", title: "280 CSMA/CD" },
+  { id: "-G8MLxl5bLE?start=504", title: "281 IDS" },
+  { id: "-G8MLxl5bLE?start=519", title: "282 IEEE802.11ac" },
+  { id: "-G8MLxl5bLE?start=540", title: "283 IEEE802.11n" },
+  { id: "-G8MLxl5bLE?start=561", title: "284 IPアドレス" },
+  { id: "-G8MLxl5bLE?start=578", title: "285 IPv4" },
+  { id: "-G8MLxl5bLE?start=595", title: "286 IPv6" },
+  { id: "-G8MLxl5bLE?start=614", title: "287 グローバルIPアドレス" },
+  { id: "-G8MLxl5bLE?start=629", title: "288 プライベートIPアドレス" },
+  { id: "-G8MLxl5bLE?start=647", title: "289 MACアドレス" },
+  { id: "-G8MLxl5bLE?start=661", title: "290 LTE" },
+  { id: "-G8MLxl5bLE?start=679", title: "291 NAPT" },
+  { id: "-G8MLxl5bLE?start=697", title: "292 NAT" },
+  { id: "-G8MLxl5bLE?start=712", title: "293 OSI基本参照モデル" },
+  { id: "-G8MLxl5bLE?start=732", title: "294 SAN" },
+  { id: "-G8MLxl5bLE?start=746", title: "295 ゲートウェイ" },
+  { id: "-G8MLxl5bLE?start=763", title: "296 SSID" },
+  { id: "-G8MLxl5bLE?start=779", title: "297 VPN" },
+  { id: "-G8MLxl5bLE?start=795", title: "298 ccTLD" },
+  { id: "-G8MLxl5bLE?start=809", title: "299 gTLD" },
+  { id: "-G8MLxl5bLE?start=823", title: "300 ping" },
+  { id: "bvRjfdBV9qc?start=18", title: "302 ゲートウェイ" },
+  { id: "bvRjfdBV9qc?start=32", title: "303 ファイアウォール" },
+  { id: "bvRjfdBV9qc?start=48", title: "304 ネットワークアドレス" },
+  { id: "bvRjfdBV9qc?start=64", title: "305 サブネットマスク" },
+  { id: "bvRjfdBV9qc?start=78", title: "306 シンプロビジョニング" },
+  { id: "bvRjfdBV9qc?start=95", title: "307 ジッタ" },
+  { id: "bvRjfdBV9qc?start=110", title: "308 スイッチングハブ" },
+  { id: "bvRjfdBV9qc?start=124", title: "309 ブリッジ" },
+  { id: "bvRjfdBV9qc?start=141", title: "310 ハブ" },
+  { id: "bvRjfdBV9qc?start=158", title: "311 リピータ" },
+  { id: "bvRjfdBV9qc?start=172", title: "312 ルータ" },
+  { id: "bvRjfdBV9qc?start=189", title: "313 スケールフリー・ネットワーク" },
+  { id: "bvRjfdBV9qc?start=208", title: "314 データローミング" },
+  { id: "bvRjfdBV9qc?start=225", title: "315 トップレベルドメイン" },
+  { id: "bvRjfdBV9qc?start=243", title: "316 ファイバチャネル" },
+  { id: "bvRjfdBV9qc?start=259", title: "317 ブロードキャスト" },
+  { id: "bvRjfdBV9qc?start=274", title: "318 マルチキャスト" },
+  { id: "bvRjfdBV9qc?start=291", title: "319 プロトコル" },
+  { id: "bvRjfdBV9qc?start=308", title: "320 ポート番号" },
+  { id: "bvRjfdBV9qc?start=326", title: "321 メトカーフの法則" },
+  { id: "bvRjfdBV9qc?start=343", title: "322 モバイルネットワークオペレータ" },
+  { id: "bvRjfdBV9qc?start=359", title: "323 リンクポピュラリティ" },
+  { id: "bvRjfdBV9qc?start=375", title: "324 レイテンシ" },
+  { id: "bvRjfdBV9qc?start=390", title: "325 ブロックチェーン" },
+  { id: "bvRjfdBV9qc?start=408", title: "326 周波数ホッピング" },
+  { id: "bvRjfdBV9qc?start=425", title: "327 帯域幅" },
+  { id: "bvRjfdBV9qc?start=440", title: "328 無線通信技術" },
+  { id: "bvRjfdBV9qc?start=457", title: "329 輻輳" },
+  { id: "bvRjfdBV9qc?start=473", title: "330 NFT" },
+            ],
+  "5. システム評価": [
+  { id: "bvRjfdBV9qc?start=491", title: "331 MTBF" },
+  { id: "bvRjfdBV9qc?start=505", title: "332 MTTR" },
+  { id: "bvRjfdBV9qc?start=520", title: "333 RASIS" },
+  { id: "bvRjfdBV9qc?start=537", title: "334 SRE" },
+  { id: "bvRjfdBV9qc?start=553", title: "335 コスト効率指数" },
+  { id: "bvRjfdBV9qc?start=569", title: "336 スケジュール効率指数" },
+  { id: "bvRjfdBV9qc?start=583", title: "337 デュアルシステム" },
+  { id: "bvRjfdBV9qc?start=598", title: "338 フェイルオーバー" },
+  { id: "bvRjfdBV9qc?start=614", title: "339 フェイルセーフ" },
+  { id: "bvRjfdBV9qc?start=630", title: "340 フェイルソフト" },
+  { id: "bvRjfdBV9qc?start=646", title: "341 フォールトトレランス" },
+  { id: "bvRjfdBV9qc?start=662", title: "342 フォールトマスキング" },
+  { id: "bvRjfdBV9qc?start=677", title: "343 フールプルーフ" },
+  { id: "bvRjfdBV9qc?start=691", title: "344 ミラーリングシステム" },
+  { id: "bvRjfdBV9qc?start=707", title: "345 レスポンスタイム" },
+  { id: "bvRjfdBV9qc?start=723", title: "346 可用性" }
+      ],
+  "6. 経営戦略と情報システム": [
+  { id: "bvRjfdBV9qc?start=740", title: "347 CMMI" },
+  { id: "bvRjfdBV9qc?start=756", title: "348 CRM" },
+  { id: "bvRjfdBV9qc?start=772", title: "349 DEMO" },
+  { id: "bvRjfdBV9qc?start=786", title: "350 DX" },
+  { id: "HDjFCDhJrfM?start=0", title: "351 EA(エンタープライズアーキテクチャ)" },
+  { id: "HDjFCDhJrfM?start=33", title: "352 EDI" },
+  { id: "HDjFCDhJrfM?start=49", title: "353 EPC" },
+  { id: "HDjFCDhJrfM?start=64", title: "354 ERP" },
+  { id: "HDjFCDhJrfM?start=80", title: "355 IEEE" },
+  { id: "HDjFCDhJrfM?start=97", title: "356 ISO" },
+  { id: "HDjFCDhJrfM?start=116", title: "357 IT システム" },
+  { id: "HDjFCDhJrfM?start=134", title: "358 ITU" },
+  { id: "HDjFCDhJrfM?start=152", title: "359 ITガバナンス" },
+  { id: "HDjFCDhJrfM?start=172", title: "360 ITポートフォリオ" },
+  { id: "HDjFCDhJrfM?start=190", title: "361 IoT" },
+  { id: "HDjFCDhJrfM?start=208", title: "362 M2M" },
+  { id: "HDjFCDhJrfM?start=223", title: "363 NFT" },
+  { id: "HDjFCDhJrfM?start=238", title: "364 PERT/CPM" },
+  { id: "HDjFCDhJrfM?start=256", title: "365 PoC" },
+  { id: "HDjFCDhJrfM?start=272", title: "366 PoW" },
+  { id: "HDjFCDhJrfM?start=290", title: "367 RFI" },
+  { id: "HDjFCDhJrfM?start=307", title: "368 RFP" },
+  { id: "HDjFCDhJrfM?start=326", title: "369 RPA" },
+  { id: "HDjFCDhJrfM?start=341", title: "370 SLA" },
+  { id: "HDjFCDhJrfM?start=358", title: "371 SNS" },
+  { id: "HDjFCDhJrfM?start=373", title: "372 SOA" },
+  { id: "HDjFCDhJrfM?start=391", title: "373 SoS" },
+  { id: "HDjFCDhJrfM?start=409", title: "374 Society5.0" },
+  { id: "HDjFCDhJrfM?start=428", title: "375 W3C" },
+  { id: "HDjFCDhJrfM?start=446", title: "376 Web3.0" },
+  { id: "HDjFCDhJrfM?start=463", title: "377 インダストリー4.0" },
+  { id: "HDjFCDhJrfM?start=483", title: "378 エンゲージメント率" },
+  { id: "HDjFCDhJrfM?start=499", title: "379 オープンソース" },
+  { id: "HDjFCDhJrfM?start=517", title: "380 オープンデータ" },
+  { id: "HDjFCDhJrfM?start=533", title: "381 コーポレートガバナンス" },
+  { id: "HDjFCDhJrfM?start=548", title: "382 サブスクリプション方式" },
+  { id: "HDjFCDhJrfM?start=566", title: "383 ブロックチェーン技術" },
+  { id: "HDjFCDhJrfM?start=585", title: "384 ペトリネット" },
+  { id: "HDjFCDhJrfM?start=601", title: "385 レガシーシステム" },
+  { id: "HDjFCDhJrfM?start=619", title: "386 形態素解析" },
+  { id: "HDjFCDhJrfM?start=637", title: "387 チャーン率" },
+  { id: "HDjFCDhJrfM?start=653", title: "388 顧客生涯価値" }
+      ],
+  "7. 情報システム開発": [
+  { id: "HDjFCDhJrfM?start=669", title: "389 BSD License" },
+  { id: "HDjFCDhJrfM?start=684", title: "390 GNU General Public License" },
+  { id: "HDjFCDhJrfM?start=703", title: "391 MIT License" },
+  { id: "HDjFCDhJrfM?start=720", title: "392 CoBRA法" },
+  { id: "HDjFCDhJrfM?start=735", title: "393 LOC法" },
+  { id: "HDjFCDhJrfM?start=751", title: "394 DFD" },
+  { id: "HDjFCDhJrfM?start=768", title: "395 DevOps" },
+  { id: "HDjFCDhJrfM?start=786", title: "396 ERD" },
+  { id: "HDjFCDhJrfM?start=801", title: "397 UML" },
+  { id: "HDjFCDhJrfM?start=821", title: "398 V字モデル" },
+  { id: "HDjFCDhJrfM?start=842", title: "399 XP(エクストリーム・プログラミング)" },
+  { id: "HDjFCDhJrfM?start=863", title: "400 かんばん" },
+  { id: "d8INSssOIBU?start=0", title: "401 COCOMO法" },
+  { id: "d8INSssOIBU?start=19", title: "402 COSMIC法" },
+  { id: "d8INSssOIBU?start=37", title: "403 類推法" },
+  { id: "d8INSssOIBU?start=54", title: "404 標準タスク法" },
+  { id: "d8INSssOIBU?start=72", title: "405 ファンクション・ポイント法" },
+  { id: "d8INSssOIBU?start=89", title: "406 ボトムアップ法" },
+  { id: "d8INSssOIBU?start=107", title: "407 ウォークスルー" },
+  { id: "d8INSssOIBU?start=126", title: "408 インスペクション" },
+  { id: "d8INSssOIBU?start=143", title: "409 フィーチャ駆動開発" },
+  { id: "d8INSssOIBU?start=162", title: "410 テスト駆動開発" },
+  { id: "d8INSssOIBU?start=180", title: "411 ウォータフォール型開発" },
+  { id: "d8INSssOIBU?start=200", title: "412 プロトタイピングモデル" },
+  { id: "d8INSssOIBU?start=219", title: "413 スパイラルモデル" },
+  { id: "d8INSssOIBU?start=235", title: "414 ペアプログラミング" },
+  { id: "d8INSssOIBU?start=252", title: "415 モブプログラミング" },
+  { id: "d8INSssOIBU?start=269", title: "416 リーンソフトウェア開発" },
+  { id: "d8INSssOIBU?start=286", title: "417 ペルソナ" },
+  { id: "d8INSssOIBU?start=304", title: "418 アジャイル" },
+  { id: "d8INSssOIBU?start=320", title: "419 スクラム" },
+  { id: "d8INSssOIBU?start=338", title: "420 スクラムマスター" },
+  { id: "d8INSssOIBU?start=357", title: "421 プロダクトオーナー" },
+  { id: "d8INSssOIBU?start=375", title: "422 プランニングポーカー" },
+  { id: "d8INSssOIBU?start=392", title: "423 インセプションデッキ" },
+  { id: "d8INSssOIBU?start=409", title: "424 ベロシティ" },
+  { id: "d8INSssOIBU?start=424", title: "425 スプリント" },
+  { id: "d8INSssOIBU?start=439", title: "426 イテレーション" },
+  { id: "d8INSssOIBU?start=456", title: "427 プロダクトバックログ" },
+  { id: "d8INSssOIBU?start=474", title: "428 スプリントバックログ" },
+  { id: "d8INSssOIBU?start=488", title: "429 レトロスペクティブ" },
+  { id: "d8INSssOIBU?start=505", title: "430 バーンダウンチャート" },
+  { id: "d8INSssOIBU?start=523", title: "431 MVP" },
+  { id: "d8INSssOIBU?start=541", title: "432 継続的インテグレーション" },
+  { id: "d8INSssOIBU?start=560", title: "433 継続的デリバリー" },
+  { id: "d8INSssOIBU?start=578", title: "434 オブジェクト指向" },
+  { id: "d8INSssOIBU?start=599", title: "435 Zero Defects" },
+  { id: "d8INSssOIBU?start=616", title: "436 リファクタリング" },
+  { id: "d8INSssOIBU?start=631", title: "437 リバースエンジニアリング" },
+  { id: "d8INSssOIBU?start=649", title: "438 共通フレーム 2013" },
+  { id: "d8INSssOIBU?start=669", title: "439 アクティビティ図" },
+  { id: "d8INSssOIBU?start=685", title: "440 オブジェクト図" },
+  { id: "d8INSssOIBU?start=702", title: "441 クラス図" },
+  { id: "d8INSssOIBU?start=721", title: "442 コミュニケーション図" },
+  { id: "d8INSssOIBU?start=738", title: "443 シーケンス図" },
+  { id: "d8INSssOIBU?start=756", title: "444 ステートマシン図" },
+  { id: "d8INSssOIBU?start=772", title: "445 ユースケース図" },
+  { id: "d8INSssOIBU?start=789", title: "446 配置図" },
+  { id: "d8INSssOIBU?start=806", title: "447 スタブ" },
+  { id: "d8INSssOIBU?start=821", title: "448 ドライバ" },
+  { id: "d8INSssOIBU?start=836", title: "449 デシジョンテーブル" },
+  { id: "d8INSssOIBU?start=855", title: "450 エラー埋め込み法" },
+  { id: "3C1NFJTMh70?start=0", title: "451 ブラックボックステスト" },
+  { id: "3C1NFJTMh70?start=18", title: "452 ホワイトボックステスト" },
+  { id: "3C1NFJTMh70?start=34", title: "453 単体テスト" },
+  { id: "3C1NFJTMh70?start=50", title: "454 結合テスト" },
+  { id: "3C1NFJTMh70?start=66", title: "455 回帰テスト" },
+  { id: "3C1NFJTMh70?start=81", title: "456 ビッグバンテスト" },
+  { id: "3C1NFJTMh70?start=97", title: "457 ミューテーションテスト" },
+  { id: "3C1NFJTMh70?start=115", title: "458 アルファテスト" },
+  { id: "3C1NFJTMh70?start=134", title: "459 ベータテスト" },
+  { id: "3C1NFJTMh70?start=152", title: "460 A/Bテスト" },
+  { id: "3C1NFJTMh70?start=170", title: "461 ペネトレーションテスト" },
+  { id: "3C1NFJTMh70?start=188", title: "462 モンキーテスト" },
+  { id: "3C1NFJTMh70?start=205", title: "463 ファジング" },
+  { id: "3C1NFJTMh70?start=221", title: "464 機能要求" },
+  { id: "3C1NFJTMh70?start=236", title: "465 非機能要求" },
+  { id: "3C1NFJTMh70?start=254", title: "466 カオスエンジニアリング" },
+  { id: "3C1NFJTMh70?start=273", title: "467 ローコード開発" },
+  { id: "3C1NFJTMh70?start=290", title: "468 ノーコード開発" },
+  { id: "3C1NFJTMh70?start=308", title: "469 PWA (Progressive Web Apps)" },
+  { id: "3C1NFJTMh70?start=327", title: "470 パラメトリック法" }
+      ],
+  "8. 情報システムのマネジメント": [
+        { id: "3C1NFJTMh70?start=342", title: "471 NDA" },
+  { id: "3C1NFJTMh70?start=360", title: "472 非形式的アプローチ" },
+  { id: "3C1NFJTMh70?start=379", title: "473 組み合わせアプローチ" },
+  { id: "3C1NFJTMh70?start=398", title: "474 EVM（Earned Value Management）" },
+  { id: "3C1NFJTMh70?start=418", title: "475 AC（コスト実績値）" },
+  { id: "3C1NFJTMh70?start=434", title: "476 EV（出来高実績値）" },
+  { id: "3C1NFJTMh70?start=450", title: "477 PV（出来高計画値）" },
+  { id: "3C1NFJTMh70?start=468", title: "478 PMBOK" },
+  { id: "3C1NFJTMh70?start=487", title: "479 BABOK" },
+  { id: "3C1NFJTMh70?start=504", title: "480 ガントチャート" },
+  { id: "3C1NFJTMh70?start=521", title: "481 WBS" },
+  { id: "3C1NFJTMh70?start=539", title: "482 マイルストーン" },
+  { id: "3C1NFJTMh70?start=556", title: "483 トレンドチャート" },
+  { id: "3C1NFJTMh70?start=573", title: "484 トルネード図" },
+  { id: "3C1NFJTMh70?start=591", title: "485 RACI図" },
+  { id: "3C1NFJTMh70?start=612", title: "486 ベースラインアプローチ" },
+  { id: "3C1NFJTMh70?start=630", title: "487 クラッシング" },
+  { id: "3C1NFJTMh70?start=648", title: "488 ファストトラッキング" },
+  { id: "3C1NFJTMh70?start=666", title: "489 コンティンジェンシープラン" },
+  { id: "3C1NFJTMh70?start=684", title: "490 リスク管理" },
+  { id: "3C1NFJTMh70?start=702", title: "491 リスクアセスメント" },
+  { id: "3C1NFJTMh70?start=719", title: "492 リスクベース認証" },
+  { id: "3C1NFJTMh70?start=737", title: "493 BAC" },
+  { id: "3C1NFJTMh70?start=754", title: "494 リスク保有" },
+  { id: "3C1NFJTMh70?start=771", title: "495 リスク低減" },
+  { id: "3C1NFJTMh70?start=788", title: "496 リスク回避" },
+  { id: "3C1NFJTMh70?start=806", title: "497 リスク移転" },
+  { id: "3C1NFJTMh70?start=822", title: "498 RBS" },
+  { id: "3C1NFJTMh70?start=840", title: "499 BYOD" },
+  { id: "3C1NFJTMh70?start=858", title: "500 COPE" },
+  { id: "Lmc0jI_xAuE?start=0", title: "501 COSO" },
+  { id: "Lmc0jI_xAuE?start=18", title: "502 IPA" },
+  { id: "Lmc0jI_xAuE?start=34", title: "503 IPS" },
+  { id: "Lmc0jI_xAuE?start=51", title: "504 ISMS" },
+  { id: "Lmc0jI_xAuE?start=68", title: "505 JVN" },
+  { id: "Lmc0jI_xAuE?start=87", title: "506 NOTICE" },
+  { id: "Lmc0jI_xAuE?start=104", title: "507 OSINT" },
+  { id: "Lmc0jI_xAuE?start=124", title: "508 SOC(Security Operation Center)" },
+  { id: "Lmc0jI_xAuE?start=143", title: "509 WAF" },
+  { id: "Lmc0jI_xAuE?start=161", title: "510 IPsec" },
+  { id: "Lmc0jI_xAuE?start=179", title: "511 エシカルハッカー" },
+  { id: "Lmc0jI_xAuE?start=197", title: "512 バグバウンティプログラム" },
+  { id: "Lmc0jI_xAuE?start=217", title: "513 ゼロトラスト" },
+  { id: "Lmc0jI_xAuE?start=237", title: "514 ソーシャルエンジニアリング" },
+  { id: "Lmc0jI_xAuE?start=254", title: "515 セキュアコンテナ" },
+  { id: "Lmc0jI_xAuE?start=272", title: "516 セキュアブラウザ" },
+  { id: "Lmc0jI_xAuE?start=289", title: "517 リモートデスクトップ" },
+  { id: "Lmc0jI_xAuE?start=307", title: "518 リモートロック" },
+  { id: "Lmc0jI_xAuE?start=324", title: "519 リモートワイプ" },
+  { id: "Lmc0jI_xAuE?start=342", title: "520 ワンタイムパスワード" },
+  { id: "Lmc0jI_xAuE?start=359", title: "521 二要素認証" },
+  { id: "Lmc0jI_xAuE?start=382", title: "522 セッション鍵方式" },
+  { id: "Lmc0jI_xAuE?start=404", title: "523 公開鍵暗号方式" },
+  { id: "Lmc0jI_xAuE?start=424", title: "524 共通鍵暗号方式" },
+  { id: "Lmc0jI_xAuE?start=441", title: "525 shellshock" },
+  { id: "Lmc0jI_xAuE?start=460", title: "526 サンドボックス" }
+  ],
+  "9. 情報システムの評価": [
+  { id: "Lmc0jI_xAuE?start=476", title: "527 デジタルフォレンジックス" },
+  { id: "Lmc0jI_xAuE?start=495", title: "528 ハニーポット" },
+  { id: "Lmc0jI_xAuE?start=513", title: "529 バッファオーバーフロー" },
+  { id: "Lmc0jI_xAuE?start=532", title: "530 クロスサイトスクリプティング" },
+  { id: "Lmc0jI_xAuE?start=548", title: "531 SQLインジェクション" },
+  { id: "Lmc0jI_xAuE?start=568", title: "532 MFA" },
+  { id: "Lmc0jI_xAuE?start=589", title: "533 FRR" },
+  { id: "Lmc0jI_xAuE?start=608", title: "534 FAR" },
+  { id: "Lmc0jI_xAuE?start=624", title: "535 再現率" },
+  { id: "Lmc0jI_xAuE?start=640", title: "536 適合率" },
+  { id: "Lmc0jI_xAuE?start=656", title: "537 混同行列" },
+  { id: "Lmc0jI_xAuE?start=675", title: "538 MCM" },
+  { id: "Lmc0jI_xAuE?start=693", title: "539 MDM" },
+  { id: "Lmc0jI_xAuE?start=711", title: "540 OLA" },
+  { id: "Lmc0jI_xAuE?start=727", title: "541 Pマーク" },
+  { id: "Lmc0jI_xAuE?start=748", title: "542 QRコード" },
+  { id: "Lmc0jI_xAuE?start=768", title: "543 エコーチェンバー" },
+  { id: "Lmc0jI_xAuE?start=787", title: "544 サイバーカスケード" },
+  { id: "Lmc0jI_xAuE?start=804", title: "545 集団極性化" },
+  { id: "Lmc0jI_xAuE?start=822", title: "546 フィルターバブル" },
+  { id: "Lmc0jI_xAuE?start=841", title: "547 バックファイア効果" },
+  { id: "Lmc0jI_xAuE?start=860", title: "548 ナッジ" },
+  { id: "Lmc0jI_xAuE?start=878", title: "549 ソーシャル・ハードニング" },
+  { id: "Lmc0jI_xAuE?start=897", title: "550 アテンションエコノミー" },
+  { id: "C6Kou0vzsC0?start=0", title: "551 バランスト・スコアカード" },
+  { id: "C6Kou0vzsC0?start=21", title: "552 ユーザビリティ" },
+  { id: "C6Kou0vzsC0?start=39", title: "553 使用性" },
+  { id: "C6Kou0vzsC0?start=55", title: "554 保守性" },
+  { id: "C6Kou0vzsC0?start=70", title: "555 信頼性" },
+  { id: "C6Kou0vzsC0?start=86", title: "556 効率性" },
+  { id: "C6Kou0vzsC0?start=104", title: "557 回遊率" },
+  { id: "C6Kou0vzsC0?start=120", title: "558 移植性" },
+  { id: "C6Kou0vzsC0?start=137", title: "559 ヒューリスティック評価法" },
+  { id: "C6Kou0vzsC0?start=157", title: "560 認知的ウォークスルー法" },
+  { id: "C6Kou0vzsC0?start=176", title: "561 インタビュー法" },
+  { id: "C6Kou0vzsC0?start=196", title: "562 思考発話法" },
+  { id: "C6Kou0vzsC0?start=215", title: "563 NEM（Novice Expert ratio Method）" },
+  { id: "C6Kou0vzsC0?start=238", title: "564 回顧法" },
+  { id: "C6Kou0vzsC0?start=258", title: "565 エルゴノミクス（人間工学）" },
+  { id: "C6Kou0vzsC0?start=280", title: "566 インクルーシブデザイン" },
+  { id: "C6Kou0vzsC0?start=301", title: "567 ビジュアルリグレッション" },
+  { id: "C6Kou0vzsC0?start=321", title: "568 LATCHの法則" },
+  { id: "C6Kou0vzsC0?start=344", title: "569 シグニファイア" }
+     ],
+    "10. 意思決定支援": [
+  { id: "C6Kou0vzsC0?start=363", title: "570 バスモデル" },
+  { id: "C6Kou0vzsC0?start=383", title: "571 マクシマックス原理" },
+  { id: "C6Kou0vzsC0?start=405", title: "572 マクシミン原理" },
+  { id: "C6Kou0vzsC0?start=425", title: "573 ラプラスの原理" },
+  { id: "C6Kou0vzsC0?start=444", title: "574 ナレッジマネジメント" },
+  { id: "C6Kou0vzsC0?start=462", title: "575 シソーラス検索" },
+  { id: "C6Kou0vzsC0?start=480", title: "576 前方一致検索" },
+  { id: "C6Kou0vzsC0?start=495", title: "577 後方一致検索" },
+  { id: "C6Kou0vzsC0?start=511", title: "578 相関係数" },
+  { id: "C6Kou0vzsC0?start=531", title: "579 母平均" },
+  { id: "C6Kou0vzsC0?start=545", title: "580 比尺度" },
+  { id: "C6Kou0vzsC0?start=564", title: "581 間隔尺度" },
+  { id: "C6Kou0vzsC0?start=582", title: "582 回帰分析" },
+  { id: "C6Kou0vzsC0?start=600", title: "583 重回帰分析" },
+  { id: "C6Kou0vzsC0?start=620", title: "584 偏回帰係数" },
+  { id: "C6Kou0vzsC0?start=639", title: "585 分散分析" },
+  { id: "C6Kou0vzsC0?start=659", title: "586 仮説検定" },
+  { id: "C6Kou0vzsC0?start=677", title: "587 t検定" },
+  { id: "C6Kou0vzsC0?start=693", title: "588 z検定" },
+  { id: "C6Kou0vzsC0?start=708", title: "589 カイ二乗検定" },
+  { id: "C6Kou0vzsC0?start=724", title: "590 P値" },
+  { id: "C6Kou0vzsC0?start=744", title: "591 有意水準" },
+  { id: "C6Kou0vzsC0?start=764", title: "592 検定力" },
+  { id: "C6Kou0vzsC0?start=782", title: "593 帰無仮説" },
+  { id: "C6Kou0vzsC0?start=800", title: "594 第1種の過誤" },
+  { id: "C6Kou0vzsC0?start=817", title: "595 第2種の過誤" },
+  { id: "C6Kou0vzsC0?start=836", title: "596 ROC曲線" },
+  { id: "C6Kou0vzsC0?start=856", title: "597 不偏分散" },
+  { id: "C6Kou0vzsC0?start=876", title: "598 メディアン" },
+  { id: "C6Kou0vzsC0?start=891", title: "599 コーホート分析" },
+  { id: "C6Kou0vzsC0?start=914", title: "600 クラスター分析" },
+  { id: "djTKta5R6Eo?start=0", title: "601 クラスタリング" },
+  { id: "djTKta5R6Eo?start=15", title: "602 因子分析" },
+  { id: "djTKta5R6Eo?start=33", title: "603 コンジョイント分析" },
+  { id: "djTKta5R6Eo?start=53", title: "604 クロス集計表" },
+  { id: "djTKta5R6Eo?start=70", title: "605 OLAP（オンライン分析処理）" },
+  { id: "djTKta5R6Eo?start=88", title: "606 MOLAP（多次元OLAP）" },
+  { id: "djTKta5R6Eo?start=108", title: "607 ROLAP（リレーショナルOLAP）" },
+  { id: "djTKta5R6Eo?start=127", title: "608 HOLAP（ハイブリッドOLAP）" },
+  { id: "djTKta5R6Eo?start=144", title: "609 ダイシング" },
+  { id: "djTKta5R6Eo?start=163", title: "610 ドリルスルー" },
+  { id: "djTKta5R6Eo?start=181", title: "611 ARMAモデル" },
+  { id: "djTKta5R6Eo?start=201", title: "612 指数平滑法" },
+  { id: "djTKta5R6Eo?start=221", title: "613 ニューロン" },
+  { id: "djTKta5R6Eo?start=241", title: "614 隠れ層" },
+  { id: "djTKta5R6Eo?start=260", title: "615 シナプス" },
+  { id: "djTKta5R6Eo?start=279", title: "616 活性化関数" },
+  { id: "djTKta5R6Eo?start=300", title: "617 ReLU（ランプ関数）" },
+  { id: "djTKta5R6Eo?start=320", title: "618 シグモイド関数" },
+  { id: "djTKta5R6Eo?start=338", title: "619 双曲線正接関数（tanh関数）" },
+  { id: "djTKta5R6Eo?start=358", title: "620 機械学習" },
+  { id: "djTKta5R6Eo?start=376", title: "621 深層学習（ディープラーニング）" },
+  { id: "djTKta5R6Eo?start=398", title: "622 強化学習" },
+  { id: "djTKta5R6Eo?start=417", title: "623 ディープニューラルネットワーク" },
+  { id: "djTKta5R6Eo?start=437", title: "624 サポートベクトルマシン" },
+  { id: "djTKta5R6Eo?start=458", title: "625 プルーニング" },
+  { id: "djTKta5R6Eo?start=478", title: "626 事前学習" },
+  { id: "djTKta5R6Eo?start=498", title: "627 過学習" },
+  { id: "djTKta5R6Eo?start=517", title: "628 転移学習" },
+  { id: "djTKta5R6Eo?start=537", title: "629 エキスパートシステム" },
+  { id: "djTKta5R6Eo?start=557", title: "630 教師あり学習" },
+  { id: "djTKta5R6Eo?start=577", title: "631 教師なし学習" },
+  { id: "djTKta5R6Eo?start=596", title: "632 LLM" },
+  { id: "djTKta5R6Eo?start=615", title: "633 ハルシネーション" },
+  { id: "djTKta5R6Eo?start=633", title: "634 プロンプトエンジニアリング" },
+  { id: "djTKta5R6Eo?start=653", title: "635 GAN" },
+  { id: "djTKta5R6Eo?start=669", title: "636 NLP" },
+  { id: "djTKta5R6Eo?start=689", title: "637 自己注意" },
+  { id: "djTKta5R6Eo?start=707", title: "638 ファインチューニング" },
+  { id: "djTKta5R6Eo?start=727", title: "639 AGI" },
+  { id: "djTKta5R6Eo?start=744", title: "640 ASI" },
+  { id: "djTKta5R6Eo?start=761", title: "641 シンギュラリティ" },
+  { id: "djTKta5R6Eo?start=782", title: "642 AI TRiSM" },
+  { id: "djTKta5R6Eo?start=799", title: "643 CAN (Controller Area Network)" },
+  { id: "djTKta5R6Eo?start=816", title: "644 ディープフェイク" },
+  { id: "djTKta5R6Eo?start=834", title: "645 マルチモーダルAI" },
+  { id: "djTKta5R6Eo?start=852", title: "646 ヒューマンインザループ (HITL)" },
+  { id: "djTKta5R6Eo?start=872", title: "647 マシン・カスタマー" }
+      ],
+    "11. その他": [
+  { id: "djTKta5R6Eo?start=890", title: "648 スマートシティ" },
+  { id: "djTKta5R6Eo?start=909", title: "649 スーパーシティ" },
+  { id: "djTKta5R6Eo?start=927", title: "650 デジタルツイン" },
+  { id: "djTKta5R6Eo?start=946", title: "651 情報銀行" },
+  { id: "djTKta5R6Eo?start=964", title: "652 eKYC" },
+  { id: "djTKta5R6Eo?start=981", title: "653 HAPS" },
+  { id: "djTKta5R6Eo?start=999", title: "654 CCoE" },
+  { id: "djTKta5R6Eo?start=1016", title: "655 量子コンピュータ" },
+  { id: "djTKta5R6Eo?start=1035", title: "656 ダークウェブ" },
+  { id: "djTKta5R6Eo?start=1054", title: "657 Emotet" },
+  { id: "djTKta5R6Eo?start=1071", title: "658 中間者攻撃" },
+  { id: "djTKta5R6Eo?start=1090", title: "659 メールスプーフィング" },
+  { id: "djTKta5R6Eo?start=1106", title: "660 スピアフィッシング" },
+  { id: "djTKta5R6Eo?start=1123", title: "661 サイバーハイジーン" },
+  { id: "djTKta5R6Eo?start=1140", title: "662 フィンテック" },
+  { id: "djTKta5R6Eo?start=1156", title: "663 クラウドソーシング" },
+  { id: "djTKta5R6Eo?start=1175", title: "664 EDR" },
+  { id: "djTKta5R6Eo?start=1193", title: "665 SASE" }
+      ]
+        };
+      
+        const videoListContainer = document.getElementById("videos");
+        const youtubeFrame = document.getElementById("youtube-frame");
+        const toggleCheckedButton = document.getElementById("toggle-checked");
+        let showChecked = true;
+
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.menu').classList.toggle('show-menu');
+        });
+
+        function loadChecklist() {
+            return JSON.parse(localStorage.getItem("videoChecklistKJS")) || {};
+        }
+
+        function saveChecklist(checklist) {
+            localStorage.setItem("videoChecklistKJS", JSON.stringify(checklist));
+        }
+
+        function updateCheckedVisibility() {
+            const checklist = loadChecklist();
+            document.querySelectorAll(".video-item").forEach(item => {
+                const checkbox = item.querySelector("input");
+                if (!showChecked && checklist[checkbox.dataset.id]) {
+                    item.style.display = "none";
+                } else {
+                    item.style.display = "flex";
+                }
+            });
+            toggleCheckedButton.innerHTML= showChecked ? "<i class='fa-solid fa-eye-slash'></i>  OFF" : "<i class='fa-solid fa-eye'> ON";
+        }
+      
+          function updateCheckedCount() {
+            const checklist = JSON.parse(localStorage.getItem("videoChecklistKJS")) || {};
+            const allItems = document.querySelectorAll(".video-item input").length;
+            const checkedItems = Object.values(checklist).filter(Boolean).length;
+            const percentage = allItems > 0 ? ((checkedItems / allItems) * 100).toFixed(1) : 0;
+            document.getElementById("checked-count").innerHTML = `<i class="fa-solid fa-square-check"></i> ${checkedItems} (${percentage}%)`;
+        }          
+          function saveChecklist(checklist) {
+              localStorage.setItem("videoChecklistKJS", JSON.stringify(checklist));
+              updateCheckedCount();
+          }
+
+document.addEventListener("DOMContentLoaded", updateCheckedCount);
+        function renderVideoList() {
+            const checklist = loadChecklist();
+            //videoListContainer.innerHTML = "";
+            // videoListContainer.appendChild(toggleCheckedButton);
+
+            Object.keys(videoCategories).forEach(category => {
+                const categoryDiv = document.createElement("div");
+                categoryDiv.className = "category";
+                categoryDiv.textContent = category;
+
+                const subcategoryDiv = document.createElement("div");
+                subcategoryDiv.className = "subcategory";
+
+                videoCategories[category].forEach(video => {
+                    const videoItem = document.createElement("div");
+                    videoItem.className = "video-item";
+
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.dataset.id = video.id;
+                    checkbox.checked = checklist[video.id] || false;
+
+                    const label = document.createElement("span");
+                    label.textContent = video.title;
+                    if (checkbox.checked) {
+                        label.classList.add("checked");
+                    }
+
+                    videoItem.appendChild(checkbox);
+                    videoItem.appendChild(label);
+                    
+                    videoItem.addEventListener("click", () => {
+                        youtubeFrame.src = `https://www.youtube.com/embed/${video.id}`;
+                    });
+                    
+                    checkbox.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                        checklist[video.id] = event.target.checked;
+                        saveChecklist(checklist);
+                        label.classList.toggle("checked", event.target.checked);
+                        updateCheckedVisibility();
+                    });
+                    
+                    subcategoryDiv.appendChild(videoItem);
+                });
+                
+                categoryDiv.addEventListener("click", () => {
+                    subcategoryDiv.style.display = subcategoryDiv.style.display === "block" ? "none" : "block";
+                });
+
+                videoListContainer.appendChild(categoryDiv);
+                videoListContainer.appendChild(subcategoryDiv);
+            });
+            updateCheckedVisibility();
+        }
+
+        toggleCheckedButton.addEventListener("click", () => {
+            showChecked = !showChecked;
+            updateCheckedVisibility();
+        });
+        
+        renderVideoList();
+    </script>
+</body>
+</html>
