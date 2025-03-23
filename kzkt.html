@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>経済学・経済対策 単語チェック</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        hr{
+            border: 0.2px solid #ccc; 
+      }
+        header {
+            background-color: #c13e1a;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        .menu-toggle {
+            font-size: 1.5em;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+        }
+        .menu {
+            font-size:0.9em;
+            text-align:left;
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            background-color: #444;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .menu a {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background-color: #555;
+        }
+        .show-menu {
+            display: block;
+        }
+      #video-player {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+        #video-player iframe {
+            width: 100%;
+            height: 100%;
+            max-height: 50vh;
+        }
+        #video-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .category {
+            margin: 10px 0;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #FDEFCD;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .subcategory {
+            margin-left: 10px;
+            display: none;
+        }
+        .video-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 5px;
+            border-bottom: 1px solid #FDEFCD;
+            background-color: #fff;
+        }
+        .video-item input {
+            margin-right: 10px;
+        }
+        .video-item span.checked {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .video-item:hover {
+            background-color: #f0f0f0;
+        }
+      
+        #toggle-checked {
+      }
+      .titlelogo {
+        width:40%;
+      }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JECR9XS11F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JECR9XS11F');
+</script>
+  <body>
+    <header>
+      <span class="titlelogo">経済学・経済対策 単語集</span>
+      <button id="toggle-checked"></button>
+      <span id="checked-count">0</span>
+        <button class="menu-toggle">☰</button>
+        <nav class="menu">
+            <a href="help.html">使い方</a>
+        <hr>
+            <a href="kkr.html">企業経営理論 単語チェック</a>
+            <a href="https://www.youtube.com/watch?v=zm22lFSSxTI&list=PLYzY_atXcQ728-5f_ChoRWDdqHqdL4r9v&index=1">企業経営理論 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=jRvX1hZ2O28&list=PLYzY_atXcQ73g9C_CgSmQNHR3UqStbTtr&index=1">企業経営理論 正誤問題判定</a>
+        <hr>
+            <a href="kjs.html">経営情報システム 単語チェック</a>
+            <a href="https://www.youtube.com/watch?v=0sIazczqGog&list=PLYzY_atXcQ70x9eKceKojqAEhLqx76tRL&index=1">経営情報システム 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=aVjUtW1ubyM&list=PLYzY_atXcQ70ix82EVFxIat-ACoKZlKcc&index=1">経営情報システム 正誤問題判定</a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=eMBSK7_34rQ&list=PLYzY_atXcQ725HX8xt0bund76e6iHFYYO&index=1">運営管理 1問1答 </a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=JqUrdZsTJpY&list=PLYzY_atXcQ737ly3LGEUG_il6tfU_F0ul&index=1">経営法務 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=yr_0D0mciY0&list=PLYzY_atXcQ72_MCO0Okqv_O-dP-ri01Mw&index=1">経営法務 正誤問題判定</a>
+        <hr>
+            <a href="kzkt.html">経済学・経済対策 単語チェック</a>
+            <a href="https://www.youtube.com/watch?v=AjpsK0CK-Kw&list=PLYzY_atXcQ703Av9oC8yN3b_CY3v5lbOU&index=1">経済学・経済政策 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=4ZnaWbpJwYI&list=PLYzY_atXcQ72b7gIEQz1-jpSz7W-K2E0o&index=1">経済学・経済政策 正誤問題判定</a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=QaQsg5BdP8E&list=PLYzY_atXcQ73O0faL5nWa-tvTJX5hI_Zq&index=1">財務・会計 1問1答 </a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=yEUMNYjEPqU&list=PLYzY_atXcQ73F6yXsGSWIIKky31bWzIpC&index=1">中小企業経営・政策 1問1答 </a>
+    </nav>
+    </header>    
+      
+    <div id="video-player">
+        <iframe id="youtube-frame" src="https://www.youtube.com/embed/s11-ePfkhR4" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="video-list">
+        <div id="videos"></div>
+    </div>
+
+    
+    <script>
+        const videoCategories = {
+            "1.経済指標の見方や読み方": [
+{ id: "s11-ePfkhR4?start=0", title: "001 国民経済計算" },
+  { id: "s11-ePfkhR4?start=19", title: "002 GDP（国内総生産）" },
+  { id: "s11-ePfkhR4?start=37", title: "003 GNP（国民総生産）" },
+  { id: "s11-ePfkhR4?start=56", title: "004 国民所得（NI）" },
+  { id: "s11-ePfkhR4?start=78", title: "005 家計消費支出" },
+  { id: "s11-ePfkhR4?start=95", title: "006 民間企業設備投資" },
+  { id: "s11-ePfkhR4?start=115", title: "007 政府最終消費支出" },
+  { id: "s11-ePfkhR4?start=133", title: "008 在庫変動" },
+  { id: "s11-ePfkhR4?start=150", title: "009 純輸出" },
+  { id: "s11-ePfkhR4?start=166", title: "010 中間投入" },
+  { id: "s11-ePfkhR4?start=184", title: "011 名目GDP" },
+  { id: "s11-ePfkhR4?start=201", title: "012 実質GDP" },
+  { id: "s11-ePfkhR4?start=220", title: "013 GDPデフレーター" },
+  { id: "s11-ePfkhR4?start=241", title: "014 国民所得統計" },
+  { id: "s11-ePfkhR4?start=261", title: "015 雇用者報酬" },
+  { id: "s11-ePfkhR4?start=278", title: "016 企業所得" },
+  { id: "s11-ePfkhR4?start=294", title: "017 財産所得" },
+  { id: "s11-ePfkhR4?start=310", title: "018 営業余剰" },
+  { id: "s11-ePfkhR4?start=326", title: "019 混合所得" },
+  { id: "s11-ePfkhR4?start=344", title: "020 雇用統計" },
+  { id: "s11-ePfkhR4?start=363", title: "021 失業率" },
+  { id: "s11-ePfkhR4?start=380", title: "022 有効求人倍率" },
+  { id: "s11-ePfkhR4?start=397", title: "023 新規求人数" },
+  { id: "s11-ePfkhR4?start=412", title: "024 労働力人口" },
+  { id: "s11-ePfkhR4?start=434", title: "025 完全失業率" },
+  { id: "s11-ePfkhR4?start=451", title: "026 物価指数" },
+  { id: "s11-ePfkhR4?start=467", title: "027 消費者物価指数（CPI）" },
+  { id: "s11-ePfkhR4?start=485", title: "028 企業物価指数（CGPI）" },
+  { id: "s11-ePfkhR4?start=504", title: "029 卸売物価指数（WPI）" },
+  { id: "s11-ePfkhR4?start=525", title: "030 コアCPI" },
+  { id: "s11-ePfkhR4?start=544", title: "031 景気動向指数" },
+  { id: "s11-ePfkhR4?start=562", title: "032 景気先行指数（CI）" },
+  { id: "s11-ePfkhR4?start=581", title: "033 景気一致指数（CI）" },
+  { id: "s11-ePfkhR4?start=599", title: "034 景気遅行指数（CI）" },
+  { id: "s11-ePfkhR4?start=618", title: "035 DI（diffusion index)" },
+  { id: "s11-ePfkhR4?start=638", title: "036 鉱工業生産指数" },
+  { id: "s11-ePfkhR4?start=657", title: "037 機械受注" },
+  { id: "s11-ePfkhR4?start=672", title: "038 耐久消費財出荷指数" },
+  { id: "s11-ePfkhR4?start=690", title: "039 マネーストック統計" },
+  { id: "s11-ePfkhR4?start=709", title: "040 マネーストック" },
+  { id: "s11-ePfkhR4?start=727", title: "041 M1" },
+  { id: "s11-ePfkhR4?start=747", title: "042 M2" },
+  { id: "s11-ePfkhR4?start=765", title: "043 M3" },
+  { id: "s11-ePfkhR4?start=784", title: "044 マネタリーベース" },
+  { id: "s11-ePfkhR4?start=804", title: "045 広義流動性" },
+  { id: "s11-ePfkhR4?start=824", title: "046 国際収支" },
+  { id: "s11-ePfkhR4?start=842", title: "047 経常収支" },
+  { id: "s11-ePfkhR4?start=861", title: "048 貿易収支" },
+  { id: "s11-ePfkhR4?start=878", title: "049 サービス収支" },
+  { id: "s11-ePfkhR4?start=896", title: "050 第一次所得収支" }      
+      ],
+         };
+      
+        const videoListContainer = document.getElementById("videos");
+        const youtubeFrame = document.getElementById("youtube-frame");
+        const toggleCheckedButton = document.getElementById("toggle-checked");
+        let showChecked = true;
+
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.menu').classList.toggle('show-menu');
+        });
+
+        function loadChecklist() {
+            return JSON.parse(localStorage.getItem("videoChecklistKZKT")) || {};
+        }
+
+        function saveChecklist(checklist) {
+            localStorage.setItem("videoChecklistKZKT", JSON.stringify(checklist));
+        }
+
+        function updateCheckedVisibility() {
+            const checklist = loadChecklist();
+            document.querySelectorAll(".video-item").forEach(item => {
+                const checkbox = item.querySelector("input");
+                if (!showChecked && checklist[checkbox.dataset.id]) {
+                    item.style.display = "none";
+                } else {
+                    item.style.display = "flex";
+                }
+            });
+            toggleCheckedButton.innerHTML= showChecked ? "<i class='fa-solid fa-eye-slash'></i>  OFF" : "<i class='fa-solid fa-eye'> ON";
+        }
+      
+          function updateCheckedCount() {
+            const checklist = JSON.parse(localStorage.getItem("videoChecklistKZKT")) || {};
+            const allItems = document.querySelectorAll(".video-item input").length;
+            const checkedItems = Object.values(checklist).filter(Boolean).length;
+            const percentage = allItems > 0 ? ((checkedItems / allItems) * 100).toFixed(1) : 0;
+            document.getElementById("checked-count").innerHTML = `<i class="fa-solid fa-square-check"></i> ${checkedItems} (${percentage}%)`;
+        }          
+          function saveChecklist(checklist) {
+              localStorage.setItem("videoChecklistKZKT", JSON.stringify(checklist));
+              updateCheckedCount();
+          }
+
+document.addEventListener("DOMContentLoaded", updateCheckedCount);
+        function renderVideoList() {
+            const checklist = loadChecklist();
+            //videoListContainer.innerHTML = "";
+            // videoListContainer.appendChild(toggleCheckedButton);
+
+            Object.keys(videoCategories).forEach(category => {
+                const categoryDiv = document.createElement("div");
+                categoryDiv.className = "category";
+                categoryDiv.textContent = category;
+
+                const subcategoryDiv = document.createElement("div");
+                subcategoryDiv.className = "subcategory";
+
+                videoCategories[category].forEach(video => {
+                    const videoItem = document.createElement("div");
+                    videoItem.className = "video-item";
+
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.dataset.id = video.id;
+                    checkbox.checked = checklist[video.id] || false;
+
+                    const label = document.createElement("span");
+                    label.textContent = video.title;
+                    if (checkbox.checked) {
+                        label.classList.add("checked");
+                    }
+
+                    videoItem.appendChild(checkbox);
+                    videoItem.appendChild(label);
+                    
+                    videoItem.addEventListener("click", () => {
+                        youtubeFrame.src = `https://www.youtube.com/embed/${video.id}`;
+                    });
+                    
+                    checkbox.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                        checklist[video.id] = event.target.checked;
+                        saveChecklist(checklist);
+                        label.classList.toggle("checked", event.target.checked);
+                        updateCheckedVisibility();
+                    });
+                    
+                    subcategoryDiv.appendChild(videoItem);
+                });
+                
+                categoryDiv.addEventListener("click", () => {
+                    subcategoryDiv.style.display = subcategoryDiv.style.display === "block" ? "none" : "block";
+                });
+
+                videoListContainer.appendChild(categoryDiv);
+                videoListContainer.appendChild(subcategoryDiv);
+            });
+            updateCheckedVisibility();
+        }
+
+        toggleCheckedButton.addEventListener("click", () => {
+            showChecked = !showChecked;
+            updateCheckedVisibility();
+        });
+        
+        renderVideoList();
+    </script>
+</body>
+</html>
