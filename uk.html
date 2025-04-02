@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>運営管理 単語チェック</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        hr{
+            border: 0.2px solid #ccc; 
+      }
+        header {
+            background-color: #c13e1a;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        .menu-toggle {
+            font-size: 1.5em;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+        }
+        .menu {
+            font-size:0.9em;
+            text-align:left;
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            background-color: #444;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .menu a {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background-color: #555;
+        }
+        .show-menu {
+            display: block;
+        }
+      #video-player {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+        #video-player iframe {
+            width: 100%;
+            height: 100%;
+            max-height: 50vh;
+        }
+        #video-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .category {
+            margin: 10px 0;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #FDEFCD;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .subcategory {
+            margin-left: 10px;
+            display: none;
+        }
+        .video-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 5px;
+            border-bottom: 1px solid #FDEFCD;
+            background-color: #fff;
+        }
+        .video-item input {
+            margin-right: 10px;
+        }
+        .video-item span.checked {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .video-item:hover {
+            background-color: #f0f0f0;
+        }
+      
+        #toggle-checked {
+      }
+      .titlelogo {
+        width:40%;
+      }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JECR9XS11F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JECR9XS11F');
+</script>
+  <body>
+    <header>
+      <span class="titlelogo">運営管理 単語集</span>
+      <button id="toggle-checked"></button>
+      <span id="checked-count">0</span>
+        <button class="menu-toggle">☰</button>
+        <nav class="menu">
+            <a href="help.html">使い方</a>
+        <hr>
+            <a href="kkr.html">企業経営理論 単語チェック</a>
+            <a href="https://www.youtube.com/watch?v=zm22lFSSxTI&list=PLYzY_atXcQ728-5f_ChoRWDdqHqdL4r9v&index=1">企業経営理論 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=jRvX1hZ2O28&list=PLYzY_atXcQ73g9C_CgSmQNHR3UqStbTtr&index=1">企業経営理論 正誤問題判定</a>
+        <hr>
+            <a href="kjs.html">経営情報システム 単語チェック</a>
+            <a href="https://www.youtube.com/watch?v=0sIazczqGog&list=PLYzY_atXcQ70x9eKceKojqAEhLqx76tRL&index=1">経営情報システム 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=aVjUtW1ubyM&list=PLYzY_atXcQ70ix82EVFxIat-ACoKZlKcc&index=1">経営情報システム 正誤問題判定</a>
+        <hr>
+            <a href="uk.html">運営管理 単語チェック</a>
+            <a href="https://www.youtube.com/watch?v=eMBSK7_34rQ&list=PLYzY_atXcQ725HX8xt0bund76e6iHFYYO&index=1">運営管理 1問1答 </a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=JqUrdZsTJpY&list=PLYzY_atXcQ737ly3LGEUG_il6tfU_F0ul&index=1">経営法務 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=yr_0D0mciY0&list=PLYzY_atXcQ72_MCO0Okqv_O-dP-ri01Mw&index=1">経営法務 正誤問題判定</a>
+        <hr>
+            <a href="kzkt.html">経済学・経済対策 単語チェック</a>
+            <a href="https://www.youtube.com/watch?v=AjpsK0CK-Kw&list=PLYzY_atXcQ703Av9oC8yN3b_CY3v5lbOU&index=1">経済学・経済政策 1問1答 </a>
+            <a href="https://www.youtube.com/watch?v=4ZnaWbpJwYI&list=PLYzY_atXcQ72b7gIEQz1-jpSz7W-K2E0o&index=1">経済学・経済政策 正誤問題判定</a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=QaQsg5BdP8E&list=PLYzY_atXcQ73O0faL5nWa-tvTJX5hI_Zq&index=1">財務・会計 1問1答 </a>
+        <hr>
+            <a href="https://www.youtube.com/watch?v=yEUMNYjEPqU&list=PLYzY_atXcQ73F6yXsGSWIIKky31bWzIpC&index=1">中小企業経営・政策 1問1答 </a>
+    </nav>
+    </header>    
+      
+    <div id="video-player">
+        <iframe id="youtube-frame" src="https://www.youtube.com/embed/bAojpepHk98" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="video-list">
+        <div id="videos"></div>
+    </div>
+
+    
+    <script>
+        const videoCategories = {
+            "1.生産管理概論 ": [
+  { id: "bAojpepHk98?start=0", title: "001 PQCDSME" },
+  { id: "bAojpepHk98?start=22", title: "002 モラール" },
+  { id: "bAojpepHk98?start=41", title: "003 生産管理" },
+  { id: "bAojpepHk98?start=61", title: "004 生産管理の基本機能" },
+  { id: "bAojpepHk98?start=84", title: "005 生産計画" },
+  { id: "bAojpepHk98?start=104", title: "006 工程管理" },
+  { id: "bAojpepHk98?start=122", title: "007 品質管理" },
+  { id: "bAojpepHk98?start=140", title: "008 原価管理" },
+  { id: "bAojpepHk98?start=160", title: "009 設備管理" },
+  { id: "bAojpepHk98?start=178", title: "010 安全管理" },
+  { id: "bAojpepHk98?start=197", title: "011 在庫管理" },
+  { id: "bAojpepHk98?start=217", title: "012 購買管理" },
+  { id: "bAojpepHk98?start=235", title: "013 外注管理" },
+  { id: "bAojpepHk98?start=255", title: "014 QC（品質管理）" },
+  { id: "bAojpepHk98?start=277", title: "015 TQC（全社的品質管理）" },
+  { id: "bAojpepHk98?start=298", title: "016 TPM（全員参加の生産保全）" },
+  { id: "bAojpepHk98?start=320", title: "017 サプライチェーンマネジメント（SCM）" },
+  { id: "bAojpepHk98?start=344", title: "018 SFA（セールス・フォース・オートメーション）" },
+  { id: "bAojpepHk98?start=365", title: "019 CRM（顧客関係管理）" },
+  { id: "bAojpepHk98?start=387", title: "020 段取り替え" },
+  { id: "bAojpepHk98?start=406", title: "021 可用率" },
+  { id: "bAojpepHk98?start=422", title: "022 遊休時間" },
+  { id: "bAojpepHk98?start=440", title: "023 労働生産性" }
+      ],
+            "2.生産の管理": [
+  { id: "bAojpepHk98?start=461", title: "024 JIT" },
+  { id: "bAojpepHk98?start=482", title: "025 平準化生産" },
+  { id: "bAojpepHk98?start=501", title: "026 かんばん方式" },
+  { id: "bAojpepHk98?start=520", title: "027 加工技術" },
+  { id: "bAojpepHk98?start=538", title: "028 自動機械" },
+  { id: "bAojpepHk98?start=557", title: "029 FA" },
+  { id: "bAojpepHk98?start=577", title: "030 FMS" },
+  { id: "bAojpepHk98?start=598", title: "031 NC工作機械" },
+  { id: "bAojpepHk98?start=616", title: "032 RFID" },
+  { id: "bAojpepHk98?start=637", title: "033 CAD" },
+  { id: "bAojpepHk98?start=652", title: "034 CAM" },
+  { id: "bAojpepHk98?start=671", title: "035 循環型生産システム" },
+  { id: "bAojpepHk98?start=692", title: "036 3R" },
+  { id: "bAojpepHk98?start=712", title: "037 LCA" },
+  { id: "bAojpepHk98?start=732", title: "038 機能設計" },
+  { id: "bAojpepHk98?start=752", title: "039 生産設計" },
+  { id: "bAojpepHk98?start=773", title: "040 組立容易性" },
+  { id: "bAojpepHk98?start=792", title: "041 コンカレントエンジニアリング" },
+  { id: "bAojpepHk98?start=813", title: "042 モジュール生産" },
+  { id: "bAojpepHk98?start=831", title: "043 モジュール設計" },
+  { id: "bAojpepHk98?start=849", title: "044 見込生産" },
+  { id: "bAojpepHk98?start=868", title: "045 受注生産" },
+  { id: "bAojpepHk98?start=884", title: "046 多種少量生産" },
+  { id: "bAojpepHk98?start=904", title: "047 少種多量生産" },
+  { id: "bAojpepHk98?start=921", title: "048 個別生産" },
+  { id: "bAojpepHk98?start=939", title: "049 ロット生産" },
+  { id: "bAojpepHk98?start=956", title: "050 連続生産" }
+      ]
+         };
+      
+        const videoListContainer = document.getElementById("videos");
+        const youtubeFrame = document.getElementById("youtube-frame");
+        const toggleCheckedButton = document.getElementById("toggle-checked");
+        let showChecked = true;
+
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.menu').classList.toggle('show-menu');
+        });
+
+        function loadChecklist() {
+            return JSON.parse(localStorage.getItem("videoChecklistUK")) || {};
+        }
+
+        function saveChecklist(checklist) {
+            localStorage.setItem("videoChecklistUK", JSON.stringify(checklist));
+        }
+
+        function updateCheckedVisibility() {
+            const checklist = loadChecklist();
+            document.querySelectorAll(".video-item").forEach(item => {
+                const checkbox = item.querySelector("input");
+                if (!showChecked && checklist[checkbox.dataset.id]) {
+                    item.style.display = "none";
+                } else {
+                    item.style.display = "flex";
+                }
+            });
+            toggleCheckedButton.innerHTML= showChecked ? "<i class='fa-solid fa-eye-slash'></i>  OFF" : "<i class='fa-solid fa-eye'> ON";
+        }
+      
+          function updateCheckedCount() {
+            const checklist = JSON.parse(localStorage.getItem("videoChecklistUK")) || {};
+            const allItems = document.querySelectorAll(".video-item input").length;
+            const checkedItems = Object.values(checklist).filter(Boolean).length;
+            const percentage = allItems > 0 ? ((checkedItems / allItems) * 100).toFixed(1) : 0;
+            document.getElementById("checked-count").innerHTML = `<i class="fa-solid fa-square-check"></i> ${checkedItems} (${percentage}%)`;
+        }          
+          function saveChecklist(checklist) {
+              localStorage.setItem("videoChecklistUK", JSON.stringify(checklist));
+              updateCheckedCount();
+          }
+
+document.addEventListener("DOMContentLoaded", updateCheckedCount);
+        function renderVideoList() {
+            const checklist = loadChecklist();
+            //videoListContainer.innerHTML = "";
+            // videoListContainer.appendChild(toggleCheckedButton);
+
+            Object.keys(videoCategories).forEach(category => {
+                const categoryDiv = document.createElement("div");
+                categoryDiv.className = "category";
+                categoryDiv.textContent = category;
+
+                const subcategoryDiv = document.createElement("div");
+                subcategoryDiv.className = "subcategory";
+
+                videoCategories[category].forEach(video => {
+                    const videoItem = document.createElement("div");
+                    videoItem.className = "video-item";
+
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.dataset.id = video.id;
+                    checkbox.checked = checklist[video.id] || false;
+
+                    const label = document.createElement("span");
+                    label.textContent = video.title;
+                    if (checkbox.checked) {
+                        label.classList.add("checked");
+                    }
+
+                    videoItem.appendChild(checkbox);
+                    videoItem.appendChild(label);
+                    
+                    videoItem.addEventListener("click", () => {
+                        youtubeFrame.src = `https://www.youtube.com/embed/${video.id}`;
+                    });
+                    
+                    checkbox.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                        checklist[video.id] = event.target.checked;
+                        saveChecklist(checklist);
+                        label.classList.toggle("checked", event.target.checked);
+                        updateCheckedVisibility();
+                    });
+                    
+                    subcategoryDiv.appendChild(videoItem);
+                });
+                
+                categoryDiv.addEventListener("click", () => {
+                    subcategoryDiv.style.display = subcategoryDiv.style.display === "block" ? "none" : "block";
+                });
+
+                videoListContainer.appendChild(categoryDiv);
+                videoListContainer.appendChild(subcategoryDiv);
+            });
+            updateCheckedVisibility();
+        }
+
+        toggleCheckedButton.addEventListener("click", () => {
+            showChecked = !showChecked;
+            updateCheckedVisibility();
+        });
+        
+        renderVideoList();
+    </script>
+</body>
+</html>
